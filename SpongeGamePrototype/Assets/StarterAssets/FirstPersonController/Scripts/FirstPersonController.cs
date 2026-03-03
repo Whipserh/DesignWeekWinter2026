@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 #endif
 
 namespace StarterAssets
@@ -115,7 +116,72 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+
+			if (isSpongeHeld())
+			{
+				Debug.Log("Sponge is held");
+			}
+            
+			if (isSpongePress())
+            {
+                Debug.Log("Sponge is Pressed");
+            }
+            
+			if (isSpongeReleased())
+            {
+                Debug.Log("Sponge is Released");
+            }
+            //Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
+            // Pause haptics globally.
+            //InputSystem.PauseHaptics();
+
+            // Resume haptics globally.
+            //InputSystem.ResumeHaptics();
+
+            // Stop haptics globally.
+            //InputSystem.ResetHaptics();
+            triggerStatus();
+        }
+
+		
+		public void rumbleSet(float x, float z)
+		{
+            Gamepad.current.SetMotorSpeeds(x, z);
+        }
+
+		private InputControl leftTrigger = Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.LeftTrigger];
+		private InputControl rightTrigger = Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.RightTrigger];
+		private bool leftTrigHeldLastFrame = false;
+        private bool rightTrigHeldLastFrame = false;
+
+
+        private void triggerStatus()
+		{
+			leftTrigHeldLastFrame = leftTrigger.IsPressed();
+			rightTrigHeldLastFrame = rightTrigger.IsPressed();
 		}
+
+        public bool isSpongeReleased()
+		{
+			bool left = !leftTrigger.IsPressed() && leftTrigHeldLastFrame;
+			bool right = !rightTrigger.IsPressed() && rightTrigHeldLastFrame;
+            return left && right;
+		}
+
+		public bool isSpongeHeld()
+		{
+            bool left = leftTrigger.IsPressed() && leftTrigHeldLastFrame;
+            bool right = rightTrigger.IsPressed() && rightTrigHeldLastFrame;
+            return left && right;
+        }
+
+		public bool isSpongePress()
+		{
+            bool left = leftTrigger.IsPressed() && !leftTrigHeldLastFrame;
+            bool right = rightTrigger.IsPressed() && !rightTrigHeldLastFrame;
+            return left && right;
+        }
+
 
 		private void LateUpdate()
 		{
