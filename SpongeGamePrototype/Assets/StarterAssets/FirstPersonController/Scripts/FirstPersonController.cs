@@ -165,8 +165,15 @@ namespace StarterAssets
 		{
 			bool left = !leftTrigger.IsPressed() && leftTrigHeldLastFrame;
 			bool right = !rightTrigger.IsPressed() && rightTrigHeldLastFrame;
-            return left && right;
-		}
+
+            bool left2 = !leftTrigger.IsPressed() && leftTrigHeldLastFrame;
+            bool right2 = !rightTrigger.IsPressed() && !rightTrigHeldLastFrame;
+
+            bool left3 = !leftTrigger.IsPressed() && !leftTrigHeldLastFrame;
+            bool right3 = !rightTrigger.IsPressed() && rightTrigHeldLastFrame;
+
+            return (left && right) || (left2 && right2) || (left3 && right3);
+        }
 
 		public bool isSpongeHeld()
 		{
@@ -179,7 +186,14 @@ namespace StarterAssets
 		{
             bool left = leftTrigger.IsPressed() && !leftTrigHeldLastFrame;
             bool right = rightTrigger.IsPressed() && !rightTrigHeldLastFrame;
-            return left && right;
+
+            bool left2 = leftTrigger.IsPressed() && leftTrigHeldLastFrame;
+            bool right2 = rightTrigger.IsPressed() && !rightTrigHeldLastFrame;
+
+            bool left3 = leftTrigger.IsPressed() && !leftTrigHeldLastFrame;
+            bool right3 = rightTrigger.IsPressed() && rightTrigHeldLastFrame;
+
+            return (left && right) || (left2 && right2) || (left3 && right3);
         }
 
 
