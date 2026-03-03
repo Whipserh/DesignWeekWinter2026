@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 #endif
 
+
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
@@ -65,9 +66,11 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
+		private InputAction _ltAction;
+		private InputAction _rtAction;
 #endif
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
@@ -101,7 +104,9 @@ namespace StarterAssets
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
-			_playerInput = GetComponent<PlayerInput>();
+			_playerInput = GetComponent<PlayerInput>(); 
+			_ltAction = _playerInput.actions["LeftTrigger"];
+			_rtAction = _playerInput.actions["RightTrigger"];
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -152,26 +157,27 @@ namespace StarterAssets
 		private bool rightTrigHeldLastFrame = false;
 
 		// Read the current status, if null -> go back to the last
+		// 用 action 的值判断“是否按下”
 		private bool LeftTrigHeldNow()
 		{
-			_gp = Gamepad.current;
-			if (_gp == null) return false;
-			return _gp.leftTrigger.ReadValue() >= triggerPressThreshold;
+			if (_ltAction == null) return false;
+			return _ltAction.ReadValue<float>() >= triggerPressThreshold;
 		}
 
 		private bool RightTrigHeldNow()
 		{
-			_gp = Gamepad.current;
-			if (_gp == null) return false;
-			return _gp.rightTrigger.ReadValue() >= triggerPressThreshold;
+			if (_rtAction == null) return false;
+			return _rtAction.ReadValue<float>() >= triggerPressThreshold;
 		}
 
+		// rumble 仍然只对手柄有效
 		public void rumbleSet(float x, float z)
 		{
-			_gp = Gamepad.current;
-			if (_gp == null) return;
-			_gp.SetMotorSpeeds(x, z);
+			var gp = Gamepad.current;
+			if (gp == null) return;
+			gp.SetMotorSpeeds(x, z);
 		}
+#endif
 
 		//update the status
 		private void triggerStatus()
@@ -224,7 +230,7 @@ namespace StarterAssets
 
 			return (left && right) || (left2 && right2) || (left3 && right3);
 		}
-#endif
+
 
 		private void LateUpdate()
 		{
