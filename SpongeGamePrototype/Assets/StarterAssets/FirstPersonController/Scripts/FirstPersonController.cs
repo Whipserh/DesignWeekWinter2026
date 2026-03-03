@@ -157,10 +157,8 @@ namespace StarterAssets
 
         private void triggerStatus()
 		{
-			if (leftTrigger.IsPressed()&& !leftTrigHeldLastFrame) leftTrigHeldLastFrame = true;
-			else if (!leftTrigger.IsPressed() && leftTrigHeldLastFrame)  leftTrigHeldLastFrame = false;
-            if (rightTrigger.IsPressed() && !rightTrigHeldLastFrame) rightTrigHeldLastFrame = true; 
-			else if (!rightTrigger.IsPressed() && rightTrigHeldLastFrame) rightTrigHeldLastFrame = false;
+			leftTrigHeldLastFrame = leftTrigger.IsPressed();
+			rightTrigHeldLastFrame = rightTrigger.IsPressed();
 		}
 
         public bool isSpongeReleased()
