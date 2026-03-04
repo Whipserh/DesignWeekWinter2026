@@ -151,13 +151,13 @@ namespace StarterAssets
 
 #if ENABLE_INPUT_SYSTEM
 		private Gamepad _gp;
-		[SerializeField] private float triggerPressThreshold = 0.2f; // 扳机按下阈值(0..1)
+		[SerializeField] private float triggerPressThreshold = 0.2f; // Trigger(0..1)
 
 		private bool leftTrigHeldLastFrame = false;
 		private bool rightTrigHeldLastFrame = false;
 
 		// Read the current status, if null -> go back to the last
-		// 用 action 的值判断“是否按下”
+		// Use action to test wheather preassed
 		private bool LeftTrigHeldNow()
 		{
 			if (_ltAction == null) return false;
@@ -170,7 +170,7 @@ namespace StarterAssets
 			return _rtAction.ReadValue<float>() >= triggerPressThreshold;
 		}
 
-		// rumble 仍然只对手柄有效
+		// rumble Only works for the Controller
 		public void rumbleSet(float x, float z)
 		{
 			var gp = Gamepad.current;
