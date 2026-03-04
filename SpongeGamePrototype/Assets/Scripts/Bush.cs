@@ -13,6 +13,7 @@ public class Bush : MonoBehaviour
     {
         if(bushHealth==0) bushLeaves.transform.localScale = Vector3.zero;
         //StartCoroutine(growShrink(0.5f, 1));
+        bushInteraction(Liquids.WATER);
     }
 
     
@@ -22,15 +23,15 @@ public class Bush : MonoBehaviour
         {
             case Liquids.WATER://grow when water is added
                 bushHealth = (bushHealth + 1) % maxBushHealth;
-                if (bushHealth < 1) StartCoroutine(growShrink(0.5f, 1)); else StartCoroutine(growShrink(1, 1));
+                if (bushHealth < 2) StartCoroutine(growShrink(0.5f, 1)); else StartCoroutine(growShrink(1, 1));
                     break;
             case Liquids.FERTILIZER:
                   bushHealth = (bushHealth + 1) % maxBushHealth;
-                if (bushHealth < 1) StartCoroutine(growShrink(0.5f, 1)); else StartCoroutine(growShrink(1, 1));
+                if (bushHealth < 2) StartCoroutine(growShrink(0.5f, 1)); else StartCoroutine(growShrink(1, 1));
                 break;
             case Liquids.HERBICIDE://shrink when herbicide is added
                 bushHealth = (bushHealth-1)%maxBushHealth;
-                if (bushHealth > 1) StartCoroutine(growShrink(0.5f, -1)); else StartCoroutine(growShrink(0, -1));
+                if (bushHealth > 0) StartCoroutine(growShrink(0.5f, -1)); else StartCoroutine(growShrink(0, -1));
                 break;
 
         }
