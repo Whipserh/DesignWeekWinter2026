@@ -26,6 +26,11 @@ public class CheckLiquid : MonoBehaviour
 
     private Coroutine _colorRoutine;
 
+    [Header("Facing")]
+    public Collider CurrentAimCollider { get; private set; }
+    public Transform CurrentAimTransform { get; private set; }
+    public bool HasValidAim => CurrentAimCollider != null;
+
     // Remember the last "completed" color. If player releases before completion, we revert back to this color.
     private Color _lastCommittedColor;
 
@@ -92,19 +97,27 @@ public class CheckLiquid : MonoBehaviour
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (!Physics.Raycast(ray, out RaycastHit hit, maxAimDistance, targetLayers, QueryTriggerInteraction.Ignore))
         {
+            CurrentAimCollider = null;
+            CurrentAimTransform = null;
+
             SetLabel(false, "");
             SetAllAtFalse();
-
             HandleReleaseOrInvalidState();
-
             _spongeHeldLastFrame = false;
             return;
         }
-
+        //CurrentAimCollider = hit.collider;
+        //CurrentAimTransform = hit.transform;
         // 2) Get Enemy type including the parent
         EnemyType enemy = null;
         if (!hit.collider.TryGetComponent(out enemy))
+        {
             enemy = hit.collider.GetComponentInParent<EnemyType>();
+           
+
+
+        }
+   
 
         if (enemy == null)
         {

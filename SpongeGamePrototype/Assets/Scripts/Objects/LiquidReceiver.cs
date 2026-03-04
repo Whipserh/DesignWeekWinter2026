@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using UnityEngine;
 
@@ -35,17 +37,17 @@ public class LiquidReceiver : MonoBehaviour
 
         if (squeezing == null)
         {
-            // Find player action squeeze From Squeezing
+            // 如果 squeezing 在 Player 上
             if (Player != null) squeezing = Player.GetComponent<Squeezing>();
         }
 
         if (checkliquid == null)
         {
-            // Find liquid type From CheckLiquid
+            // 如果 checkliquid 在 Player 上
             if (Player != null) checkliquid = Player.GetComponent<CheckLiquid>();
         }
 
-        // Call Coroutine
+        // 启动协程
         signalRoutine = StartCoroutine(GetSignalsLoop());
     }
 
@@ -71,7 +73,7 @@ public class LiquidReceiver : MonoBehaviour
 
     private void GetSignalsOnce()
     {
-        // Basic fault tolerance
+        // 基础容错
         if (Player == null || squeezing == null || checkliquid == null)
         {
             SetOutputs(false, false, false);
@@ -82,23 +84,24 @@ public class LiquidReceiver : MonoBehaviour
 
         if (distance < range && IsSqueezing())
         {
-            // Read liquid status
-            // waterReady / fertReady / herbReady
+            // 读取 checkliquid 的状态
+            // 这里按你给的字段名写：waterReady / fertReady / herbReady
             watered = checkliquid.waterReady;
             fertilized = checkliquid.fertReady;
             herbicided = checkliquid.herbReady;
         }
         else
         {
-            // if not in range / No squeeze => Output false
-            SetOutputs(false, false, false); // delate this if you what to keep the memory
+            // 不在范围 / 没有 squeeze => 输出 false（如果你想保持上一次，就删掉这行）
+            SetOutputs(false, false, false);
         }
     }
 
-    // make sure the name is correct
+    // 这里封装一下，避免你 squeezing 的字段名不同
     private bool IsSqueezing()
     {
-        //
+        // 你把这里改成你 Squeezing 里真正的 bool/方法
+        // 例：return squeezing.isSqueezing;
         return squeezing != null && squeezing.isSqueeze;
     }
 
@@ -109,7 +112,7 @@ public class LiquidReceiver : MonoBehaviour
         herbicided = h;
     }
 
-    // If you need to read the output externally, use a read-only getter.
+    // 如果你需要外部读取输出，用只读 getter
     public bool Watered => watered;
     public bool Fertilized => fertilized;
     public bool Herbicided => herbicided;

@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 606786497706212199}
-  - component: {fileID: 2262001041653671000}
   - component: {fileID: 3207201775631388913}
+  - component: {fileID: 2273359237163344318}
+  - component: {fileID: 2765091520375857347}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -35,21 +36,6 @@ Transform:
   - {fileID: 639222115020036329}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2262001041653671000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813134091719457934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e7c8dd5a723bc428ba3c3b23ed75b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bush
-  maxBushHealth: 2
-  bushLeaves: {fileID: 258158238689100371}
-  growShrinkRate: 0.25
 --- !u!65 &3207201775631388913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71,6 +57,43 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7400944, y: 1.0787576, z: 0.7221174}
   m_Center: {x: -0.017207503, y: 0.49824446, z: 0.025206089}
+--- !u!114 &2273359237163344318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813134091719457934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8501fe89545e244a8c784a61fc76fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LiquidReceiver
+  Player: {fileID: 0}
+  range: 2.2
+  squeezing: {fileID: 0}
+  checkliquid: {fileID: 0}
+  watered: 0
+  fertilized: 0
+  herbicided: 0
+  pollInterval: 0.05
+--- !u!114 &2765091520375857347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813134091719457934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6e967c98de8404fbfcb4d67f079201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DavidBush
+  LiquidReceiver: {fileID: 0}
+  bushLeaves: {fileID: 0}
+  bushHealth: 0
+  maxBushHealth: 2
+  growShrinkRate: 2
 --- !u!1001 &1104578576871243522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,11 +159,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10085746de86c1040a464c7feed62c8e, type: 3}
---- !u!1 &258158238689100371 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 10085746de86c1040a464c7feed62c8e, type: 3}
-  m_PrefabInstance: {fileID: 1104578576871243522}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &639222115020036329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 10085746de86c1040a464c7feed62c8e, type: 3}
