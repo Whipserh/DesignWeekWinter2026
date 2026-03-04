@@ -15,7 +15,7 @@ public class Bush : MonoBehaviour
         //StartCoroutine(growShrink(0.5f, 1));
     }
 
-    
+    //getComponent<Bush>().bushInteraction(WATER);
     public void bushInteraction(Liquids liquid)
     {
         switch (liquid)
@@ -39,6 +39,7 @@ public class Bush : MonoBehaviour
     public float growShrinkRate;
     IEnumerator growShrink(float scale, int growShrink)
     {
+        if (growShrink == 1)
         while (bushLeaves.transform.localScale.x < scale)//while it is below a scale size,
                                                          //grow/shrink with respect to growShrink integer (either 1 or -1)
         {
@@ -46,6 +47,14 @@ public class Bush : MonoBehaviour
             bushLeaves.transform.localScale += growShrink * Vector3.one * growShrinkRate * Time.deltaTime;
             yield return null;//wait a frame
         }
+        if (growShrink == -1)
+            while (bushLeaves.transform.localScale.x > scale)//while it is below a scale size,
+                                                             //grow/shrink with respect to growShrink integer (either 1 or -1)
+            {
+                //grow the bush by a certain amount
+                bushLeaves.transform.localScale += growShrink * Vector3.one * growShrinkRate * Time.deltaTime;
+                yield return null;//wait a frame
+            }
     }
 
 }
