@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HandAni : MonoBehaviour
 {
-
+    int i = 0;
     public Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,16 +13,19 @@ public class HandAni : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) //when the a key is pressed, the hand will squeeze
+        if (Input.GetKeyDown(KeyCode.B)) //when the a key is pressed
         {
-            animator.SetBool("isSqueezing", true);
-            animator.SetBool("isAbsorbing", false);
-        }
-
-        if (Input.GetKeyDown(KeyCode.A)) //when the s key is pressed, the hand will release
-        {
-            animator.SetBool("isAbsorbing", true);
-            animator.SetBool("isSqueezing", false);
+            if (i == 0) {
+                animator.SetBool("isAbsorbing", true); //abosrb animation plays
+                animator.SetBool("isSqueezing", false);
+                i++;
+            }
+            else
+            {
+                animator.SetBool("isSqueezing", true); //squeeazing animation plays
+                animator.SetBool("isAbsorbing", false);
+                i = 0;
+            }
         }
         
 
