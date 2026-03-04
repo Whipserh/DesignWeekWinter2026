@@ -6,7 +6,7 @@ public class Pond : MonoBehaviour
     void Start()
     {
         pondWater.transform.localScale = new Vector3(1, waterFill/maxWaterFill,1);
-        interaction(Liquids.FERTILIZER);
+        //interaction(Liquids.FERTILIZER);
     }
 
     // Update is called once per frame
