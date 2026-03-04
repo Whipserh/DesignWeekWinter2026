@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 #endif
 
+
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
@@ -65,9 +66,11 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
+		private InputAction _ltAction;
+		private InputAction _rtAction;
 #endif
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
@@ -101,7 +104,9 @@ namespace StarterAssets
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
-			_playerInput = GetComponent<PlayerInput>();
+			_playerInput = GetComponent<PlayerInput>(); 
+			_ltAction = _playerInput.actions["LeftTrigger"];
+			_rtAction = _playerInput.actions["RightTrigger"];
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -143,44 +148,88 @@ namespace StarterAssets
             triggerStatus();
         }
 
-		
-		public void rumbleSet(float x, float z)
-		{
-            Gamepad.current.SetMotorSpeeds(x, z);
-        }
 
-		private InputControl leftTrigger = Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.LeftTrigger];
-		private InputControl rightTrigger = Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.RightTrigger];
+#if ENABLE_INPUT_SYSTEM
+		private Gamepad _gp;
+		[SerializeField] private float triggerPressThreshold = 0.2f; // 扳机按下阈值(0..1)
+
 		private bool leftTrigHeldLastFrame = false;
-        private bool rightTrigHeldLastFrame = false;
+		private bool rightTrigHeldLastFrame = false;
 
-
-        private void triggerStatus()
+		// Read the current status, if null -> go back to the last
+		// 用 action 的值判断“是否按下”
+		private bool LeftTrigHeldNow()
 		{
-			leftTrigHeldLastFrame = leftTrigger.IsPressed();
-			rightTrigHeldLastFrame = rightTrigger.IsPressed();
+			if (_ltAction == null) return false;
+			return _ltAction.ReadValue<float>() >= triggerPressThreshold;
 		}
 
-        public bool isSpongeReleased()
+		private bool RightTrigHeldNow()
 		{
-			bool left = !leftTrigger.IsPressed() && leftTrigHeldLastFrame;
-			bool right = !rightTrigger.IsPressed() && rightTrigHeldLastFrame;
-            return left && right;
+			if (_rtAction == null) return false;
+			return _rtAction.ReadValue<float>() >= triggerPressThreshold;
+		}
+
+		// rumble 仍然只对手柄有效
+		public void rumbleSet(float x, float z)
+		{
+			var gp = Gamepad.current;
+			if (gp == null) return;
+			gp.SetMotorSpeeds(x, z);
+		}
+#endif
+
+		//update the status
+		private void triggerStatus()
+		{
+			leftTrigHeldLastFrame = LeftTrigHeldNow();
+			rightTrigHeldLastFrame = RightTrigHeldNow();
+		}
+
+		public bool isSpongeReleased()
+		{
+			bool leftNow = LeftTrigHeldNow();
+			bool rightNow = RightTrigHeldNow();
+
+			bool leftReleased = !leftNow && leftTrigHeldLastFrame;
+			bool rightReleased = !rightNow && rightTrigHeldLastFrame;
+
+		//Any of them release
+			bool left2 = !leftNow && leftTrigHeldLastFrame;
+			bool right2 = !rightNow && !rightTrigHeldLastFrame;
+
+			bool left3 = !leftNow && !leftTrigHeldLastFrame;
+			bool right3 = !rightNow && rightTrigHeldLastFrame;
+
+			return (leftReleased && rightReleased) || (left2 && right2) || (left3 && right3);
 		}
 
 		public bool isSpongeHeld()
 		{
-            bool left = leftTrigger.IsPressed() && leftTrigHeldLastFrame;
-            bool right = rightTrigger.IsPressed() && rightTrigHeldLastFrame;
-            return left && right;
-        }
+			bool leftNow = LeftTrigHeldNow();
+			bool rightNow = RightTrigHeldNow();
+
+			bool left = leftNow && leftTrigHeldLastFrame;
+			bool right = rightNow && rightTrigHeldLastFrame;
+			return left && right;
+		}
 
 		public bool isSpongePress()
 		{
-            bool left = leftTrigger.IsPressed() && !leftTrigHeldLastFrame;
-            bool right = rightTrigger.IsPressed() && !rightTrigHeldLastFrame;
-            return left && right;
-        }
+			bool leftNow = LeftTrigHeldNow();
+			bool rightNow = RightTrigHeldNow();
+
+			bool left = leftNow && !leftTrigHeldLastFrame;
+			bool right = rightNow && !rightTrigHeldLastFrame;
+
+			bool left2 = leftNow && leftTrigHeldLastFrame;
+			bool right2 = rightNow && !rightTrigHeldLastFrame;
+
+			bool left3 = leftNow && !leftTrigHeldLastFrame;
+			bool right3 = rightNow && rightTrigHeldLastFrame;
+
+			return (left && right) || (left2 && right2) || (left3 && right3);
+		}
 
 
 		private void LateUpdate()
