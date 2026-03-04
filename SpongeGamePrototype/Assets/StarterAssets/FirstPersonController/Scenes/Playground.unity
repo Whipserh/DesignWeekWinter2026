@@ -8660,12 +8660,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Squeezing
   checkLiquid: {fileID: 1147385127}
   controller: {fileID: 135756641613574976}
-  target: {fileID: 1726028674}
   requireSqueezePress: 0
   idleColorTolerance: 0.02
-  particleSystemToTint: {fileID: 463767506}
+  ps: {fileID: 463767506}
   syncParticleAlpha: 1
-  syncParticlesOnlyWhenShown: 1
 --- !u!1001 &1174095155
 PrefabInstance:
   m_ObjectHideFlags: 0
