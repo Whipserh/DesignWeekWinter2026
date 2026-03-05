@@ -4,10 +4,12 @@ public enum EnemyKind
 {
     Water,
     Fertilizer,
-    Herbicide
+    Herbicide,
+    Paint
 }
 
 public class EnemyType : MonoBehaviour
 {
+    public Color paintColor;
     public EnemyKind kind;
 }

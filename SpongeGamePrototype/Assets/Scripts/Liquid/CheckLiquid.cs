@@ -20,6 +20,7 @@ public class CheckLiquid : MonoBehaviour
     public Color waterColor = new Color(0.2f, 0.5f, 1f, 1f);      // blue
     public Color fertColor = new Color(1f, 0.65f, 0.15f, 1f);    // orange
     public Color herbColor = new Color(0.55f, 0.05f, 0.05f, 1f); // dark red
+    public Color paint;
     public Color idleColor = new Color(1f, 1f, 1f, 0.15f);       // defult
 
     public float colorLerpTime = 0.6f;
@@ -58,11 +59,13 @@ public class CheckLiquid : MonoBehaviour
     public bool atWater;
     public bool atFert;
     public bool atHerb;
+    public bool atPaint;
 
     [Header("Ready When Fully Colored")]
     public bool waterReady;
     public bool fertReady;
     public bool herbReady;
+    public bool paintReady;
 
     void Awake()
     {
@@ -166,6 +169,7 @@ public class CheckLiquid : MonoBehaviour
             case EnemyKind.Water: atWater = true; break;
             case EnemyKind.Fertilizer: atFert = true; break;
             case EnemyKind.Herbicide: atHerb = true; break;
+            case EnemyKind.Paint: atPaint = true; break;
         }
 
         // 5) Changing color when the player squeeze
@@ -203,6 +207,7 @@ public class CheckLiquid : MonoBehaviour
         atWater = false;
         atFert = false;
         atHerb = false;
+        atPaint = false;
         //
         nearBucket = false;
     }
@@ -226,6 +231,7 @@ public class CheckLiquid : MonoBehaviour
         waterReady = false;
         fertReady = false;
         herbReady = false;
+        paintReady = false;
     }
 
     private void SetReadyBool(EnemyKind kind, bool value)
@@ -234,6 +240,7 @@ public class CheckLiquid : MonoBehaviour
         waterReady = false;
         fertReady = false;
         herbReady = false;
+        paintReady = false;
 
         if (!value) return;
 
@@ -242,6 +249,7 @@ public class CheckLiquid : MonoBehaviour
             case EnemyKind.Water: waterReady = true; break;
             case EnemyKind.Fertilizer: fertReady = true; break;
             case EnemyKind.Herbicide: herbReady = true; break;
+            case EnemyKind.Paint: paintReady = true; break;
         }
     }
 
@@ -252,6 +260,7 @@ public class CheckLiquid : MonoBehaviour
             case EnemyKind.Water: return waterColor;
             case EnemyKind.Fertilizer: return fertColor;
             case EnemyKind.Herbicide: return herbColor;
+            case EnemyKind.Paint: return paint;
             default: return uiImage != null ? uiImage.color : Color.white;
         }
     }
