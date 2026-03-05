@@ -166,7 +166,7 @@ public class CheckLiquid : MonoBehaviour
             StartReverseToCommittedIfNeeded();
         }
         **/
-        if ((controller != null) && controller.isSpongeHeld())
+        if ((controller != null) && controller.isSpongeReleased())
         {
             // Start/continue coloring toward current enemy kind.
             // IMPORTANT: if already completed for this kind, this will do nothing (no restart, no loop).
