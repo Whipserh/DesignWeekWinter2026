@@ -8932,7 +8932,7 @@ MonoBehaviour:
   controller: {fileID: 135756641613574976}
   requireSqueezePress: 0
   idleColorTolerance: 0.02
-  ps: {fileID: 463767506}
+  particlesSystem: {fileID: 0}
   syncParticleAlpha: 1
 --- !u!1001 &1174095155
 PrefabInstance:
