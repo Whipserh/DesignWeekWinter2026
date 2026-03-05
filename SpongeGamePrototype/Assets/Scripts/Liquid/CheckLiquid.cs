@@ -27,10 +27,7 @@ public class CheckLiquid : MonoBehaviour
 
     private Coroutine _colorRoutine;
 
-    [Header("Facing")]
-    public Collider CurrentAimCollider { get; private set; }
-    public Transform CurrentAimTransform { get; private set; }
-    public bool HasValidAim => CurrentAimCollider != null;
+    
 
     // Remember the last "completed" color. If player releases before completion, we revert back to this color.
     private Color _lastCommittedColor;
@@ -90,8 +87,7 @@ public class CheckLiquid : MonoBehaviour
             SetAllAtFalse();
 
             // If we lose refs mid-transition, treat it like a release.
-            HandleReleaseOrInvalidState();
-
+            
             _spongeHeldLastFrame = false;
             return;
         }
@@ -100,25 +96,18 @@ public class CheckLiquid : MonoBehaviour
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (!Physics.Raycast(ray, out RaycastHit hit, maxAimDistance, targetLayers, QueryTriggerInteraction.Ignore))
         {
-            CurrentAimCollider = null;
-            CurrentAimTransform = null;
-
             SetLabel(false, "");
             SetAllAtFalse();
-            HandleReleaseOrInvalidState();
+            
             _spongeHeldLastFrame = false;
             return;
         }
-        //CurrentAimCollider = hit.collider;
-        //CurrentAimTransform = hit.transform;
+
         // 2) Get Enemy type including the parent
         EnemyType enemy = null;
         if (!hit.collider.TryGetComponent(out enemy))
         {
             enemy = hit.collider.GetComponentInParent<EnemyType>();
-           
-
-
         }
    
 
@@ -126,8 +115,6 @@ public class CheckLiquid : MonoBehaviour
         {
             SetLabel(false, "");
             SetAllAtFalse();
-
-            HandleReleaseOrInvalidState();
 
             _spongeHeldLastFrame = false;
             return;
@@ -138,7 +125,6 @@ public class CheckLiquid : MonoBehaviour
          (controller != null) ? controller.transform.position :
          (cam != null) ? cam.transform.position :
          transform.position;
-
             // 用 collider 最近点，不用 enemy.transform.position（pivot 可能偏）
             Vector3 closest = hit.collider.ClosestPoint(playerPos);
             float dist = Vector3.Distance(playerPos, closest);
@@ -147,10 +133,23 @@ public class CheckLiquid : MonoBehaviour
             {
                 SetLabel(false, "");
                 SetAllAtFalse();
-                HandleReleaseOrInvalidState();
+                //HandleReleaseOrInvalidState();
                 _spongeHeldLastFrame = false;
                 return;
             }
+
+         
+
+        Vector3 toTarget = (enemy.transform.position - cam.transform.position).normalized;
+        float dot = Vector3.Dot(cam.transform.forward, toTarget);
+        if (dot < facingDot)
+        {
+            SetLabel(false, "");
+            SetAllAtFalse();
+
+            _spongeHeldLastFrame = false;
+            return;
+        }
 
         // 4) Satify conditions：Show words + Show bool
         SetAllAtFalse(); // Clear first (IMPORTANT: do NOT clear after setting nearBucket)
@@ -166,35 +165,30 @@ public class CheckLiquid : MonoBehaviour
         }
 
         // 5) Changing color when the player squeeze
-        bool spongeHeld = (controller != null) && controller.isSpongeHeld();
-
+        
         // Detect release this frame.
-        bool releasedThisFrame = _spongeHeldLastFrame && !spongeHeld;
-
+        //bool releasedThisFrame = _spongeHeldLastFrame && !spongeHeld; //controller.isSpongeReleased();
+        /**
         if (releasedThisFrame)
         {
             // Reverse ONLY if we were mid-forward and NOT completed.
             StartReverseToCommittedIfNeeded();
         }
-
-        if (spongeHeld)
+        **/
+        if ((controller != null) && controller.isSpongeReleased())
         {
             // Start/continue coloring toward current enemy kind.
             // IMPORTANT: if already completed for this kind, this will do nothing (no restart, no loop).
+
             Color target = GetTargetColor(enemy);
             StartSmoothColorTo(enemy.kind, target);
+            _spongeHeldLastFrame = true;
         }
+        else _spongeHeldLastFrame = false;
 
-        _spongeHeldLastFrame = spongeHeld;
     }
 
-    // If we are in an invalid aiming state (or lost refs), treat it like a release.
-    private void HandleReleaseOrInvalidState()
-    {
-        // Do NOT reverse if already completed (keep full color and progress locked at 1).
-        StartReverseToCommittedIfNeeded();
-        _spongeHeldLastFrame = false;
-    }
+    
 
     void SetAllAtFalse()
     {
@@ -296,6 +290,7 @@ public class CheckLiquid : MonoBehaviour
         _colorRoutine = StartCoroutine(CoLerpColorForward(kind, GetKindColor(kind), colorLerpTime));
     }
 
+    /**
     // Reverse ONLY when we are mid-forward and progress is not complete.
     private void StartReverseToCommittedIfNeeded()
     {
@@ -322,6 +317,7 @@ public class CheckLiquid : MonoBehaviour
 
         _colorRoutine = StartCoroutine(CoLerpColorReverse(_lastCommittedColor, colorLerpTime, startProgress));
     }
+    */
 
     private System.Collections.IEnumerator CoLerpColorForward(EnemyKind kind, Color target, float duration)
     {

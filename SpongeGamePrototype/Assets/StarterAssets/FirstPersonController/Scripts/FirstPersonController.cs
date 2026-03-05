@@ -122,20 +122,10 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 
-			if (isSpongeHeld())
+			if (!isSpongeHeld())
 			{
-				Debug.Log("Sponge is held");
+				rumbleSet(0, 0);
 			}
-            
-			if (isSpongePress())
-            {
-                Debug.Log("Sponge is Pressed");
-            }
-            
-			if (isSpongeReleased())
-            {
-                Debug.Log("Sponge is Released");
-            }
             //Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
             // Pause haptics globally.
             //InputSystem.PauseHaptics();
@@ -206,6 +196,7 @@ namespace StarterAssets
 
 		public bool isSpongeHeld()
 		{
+			rumbleSet(0.25f, 0.75f);
 			bool leftNow = LeftTrigHeldNow();
 			bool rightNow = RightTrigHeldNow();
 
