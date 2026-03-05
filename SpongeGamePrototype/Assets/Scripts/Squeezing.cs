@@ -14,9 +14,6 @@ public class Squeezing : MonoBehaviour
     public ParticleSystem ps;              // the particle system to start/stop
     public bool syncParticleAlpha = true;  // keep alpha from UI color
 
-    [Header("isSqueeze")]
-    public bool isSqueeze;
-
     void Awake()
     {
         if (ps == null) ps = GetComponent<ParticleSystem>();
@@ -25,8 +22,6 @@ public class Squeezing : MonoBehaviour
 
     void Update()
     {
-
-
         if (ps == null) return;
 
         bool nearBucket = (checkLiquid != null) && checkLiquid.nearBucket;
@@ -57,7 +52,7 @@ public class Squeezing : MonoBehaviour
 
         // Show condition => start particle; otherwise stop it.
         bool show = (!nearBucket) && squeeze && (!isIdleColor);
-        isSqueeze = show;
+
         if (show)
         {
             // Sync particle color to current UI color
@@ -79,5 +74,4 @@ public class Squeezing : MonoBehaviour
                 ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
-    
 }
