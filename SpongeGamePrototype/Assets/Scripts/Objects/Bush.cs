@@ -11,7 +11,14 @@ public class Bush : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(bushHealth==0) bushLeaves.transform.localScale = Vector3.zero;
+
+        if (bushLeaves == null)
+        {
+            Transform t = transform.Find("bushLeaves"); // 子物体名字
+            if (t != null) bushLeaves = t.gameObject;
+        }
+
+        if (bushHealth==0) bushLeaves.transform.localScale = Vector3.zero;
         //StartCoroutine(growShrink(0.5f, 1));
         bushInteraction(Liquids.WATER);
     }
