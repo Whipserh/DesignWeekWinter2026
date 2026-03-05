@@ -6604,6 +6604,111 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 47d92fd056ce6e8468575651a3c8677b, type: 3}
   m_PrefabInstance: {fileID: 638204259}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &641982324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 641982328}
+  - component: {fileID: 641982327}
+  - component: {fileID: 641982326}
+  - component: {fileID: 641982325}
+  m_Layer: 0
+  m_Name: Liquid ControllerWeeds
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &641982325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641982324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28015f54d53daf449bd4e51a4cbe6e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Squeezing
+  checkLiquid: {fileID: 641982327}
+  controller: {fileID: 135756641613574976}
+  requireSqueezePress: 0
+  idleColorTolerance: 0.02
+  ps: {fileID: 463767506}
+  syncParticleAlpha: 1
+  isSqueeze: 0
+--- !u!114 &641982326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641982324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e3b20c6049a0249bbd8f797e761396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColorProgressSlider
+  slider: {fileID: 1231587021}
+  source: {fileID: 641982327}
+  fillImage: {fileID: 1085101719}
+  hideWhenIdle: 0
+  idleEpsilon: 0.001
+  syncFillColorWithUIImage: 1
+--- !u!114 &641982327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641982324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d1c802e22d8b9448f1656dc4e49a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckLiquid
+  cam: {fileID: 1018677614}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  label: {fileID: 751969889}
+  uiImage: {fileID: 461295054}
+  controller: {fileID: 135756641613574976}
+  maxAimDistance: 8
+  requireNearDistance: 3
+  facingDot: 0.85
+  waterColor: {r: 0.2, g: 0.5, b: 1, a: 1}
+  fertColor: {r: 0.47661802, g: 0.7987421, b: 0.007535178, a: 1}
+  herbColor: {r: 0.55, g: 0.05, b: 0.05, a: 1}
+  idleColor: {r: 0.9245283, g: 0.9245283, b: 0.3285273, a: 1}
+  colorLerpTime: 0.7
+  nearBucket: 0
+  atWater: 0
+  atFert: 0
+  atHerb: 0
+  waterReady: 0
+  fertReady: 0
+  herbReady: 0
+--- !u!4 &641982328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641982324}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.15, y: 0.6651, z: 8.12544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &676779842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10853,6 +10958,18 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1726028674}
+    - target: {fileID: 3156814465384900460, guid: 636b55994ca7b2f48b7b41e9e1669860, type: 3}
+      propertyPath: watered
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156814465384900460, guid: 636b55994ca7b2f48b7b41e9e1669860, type: 3}
+      propertyPath: squeezing
+      value: 
+      objectReference: {fileID: 641982325}
+    - target: {fileID: 3156814465384900460, guid: 636b55994ca7b2f48b7b41e9e1669860, type: 3}
+      propertyPath: checkliquid
+      value: 
+      objectReference: {fileID: 641982327}
     - target: {fileID: 3284353338187670408, guid: 636b55994ca7b2f48b7b41e9e1669860, type: 3}
       propertyPath: cam
       value: 
@@ -10944,3 +11061,4 @@ SceneRoots:
   - {fileID: 2093265490847272462}
   - {fileID: 1147385126}
   - {fileID: 8519623958878995847}
+  - {fileID: 641982328}
