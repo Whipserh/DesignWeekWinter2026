@@ -11,7 +11,8 @@ using UnityEngine;
 public class LiquidReceiver : MonoBehaviour
 {
     [Header("Ref")]
-    public GameObject Player;
+    public GameObject Sponge;
+    public GameObject LiquidController;
     public float range = 2f;
     public Squeezing squeezing;
     public CheckLiquid checkliquid;
@@ -20,6 +21,7 @@ public class LiquidReceiver : MonoBehaviour
     [SerializeField] private bool watered;
     [SerializeField] private bool fertilized;
     [SerializeField] private bool herbicided;
+    [SerializeField] private bool painted;
 
     [Header("Coroutine")]
     public float pollInterval = 0.05f;
@@ -28,26 +30,27 @@ public class LiquidReceiver : MonoBehaviour
 
     private void Start()
     {
-        // Auto-find if not assigned (optional)
-        if (Player == null)
+
+        if (Sponge == null)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
-            if (p != null) Player = p;
+            if (p != null) Sponge = p;
         }
 
-        if (squeezing == null)
+        if (LiquidController == null)
         {
-            // 如果 squeezing 在 Player 上
-            if (Player != null) squeezing = Player.GetComponent<Squeezing>();
+            var l = GameObject.FindGameObjectWithTag("GameController");
+            if (l != null) LiquidController = l ;
         }
 
-        if (checkliquid == null)
+        if (LiquidController != null)
         {
-            // 如果 checkliquid 在 Player 上
-            if (Player != null) checkliquid = Player.GetComponent<CheckLiquid>();
+            if (squeezing == null) squeezing = LiquidController.GetComponentInChildren<Squeezing>(true);
+            if (checkliquid == null) checkliquid = LiquidController.GetComponentInChildren<CheckLiquid>(true);
         }
 
-        // 启动协程
+      //  Debug.Log($"[LiquidReceiver] Player={Player?.name} squeezing={squeezing?.name} checkliquid={checkliquid?.name}");
+
         signalRoutine = StartCoroutine(GetSignalsLoop());
     }
 
@@ -71,30 +74,42 @@ public class LiquidReceiver : MonoBehaviour
         }
     }
 
+    public Color color;
+
     private void GetSignalsOnce()
     {
-        // 基础容错
-        if (Player == null || squeezing == null || checkliquid == null)
+
+       
+
+        if (LiquidController == null || squeezing == null || checkliquid == null)
         {
-            SetOutputs(false, false, false);
+            SetOutputs(false, false, false, false);
             return;
         }
 
-        float distance = Vector3.Distance(Player.transform.position, transform.position);
-
+        float distance = Vector3.Distance(Sponge.transform.position, transform.position);
+        if (distance >= range) return;
         if (distance < range && IsSqueezing())
         {
-            // 读取 checkliquid 的状态
-            // 这里按你给的字段名写：waterReady / fertReady / herbReady
+            // read color status
             watered = checkliquid.waterReady;
             fertilized = checkliquid.fertReady;
             herbicided = checkliquid.herbReady;
+            painted = checkliquid.paintReady;
+            color = checkliquid.uiImage != null ? checkliquid.uiImage.color : checkliquid.paint;
         }
         else
         {
-            // 不在范围 / 没有 squeeze => 输出 false（如果你想保持上一次，就删掉这行）
-            SetOutputs(false, false, false);
+            // only clear outputs when THIS receiver object is a "pound"
+            if (CompareTag("pound"))
+            {
+                SetOutputs(false, false, false, false);
+            }
+            // otherwise: keep last outputs (do nothing)
         }
+
+        // 颜色：用 UI 当前色最稳（避免 paint 字段没赋值）
+        if (checkliquid.uiImage != null) color = checkliquid.uiImage.color;
     }
 
     // 这里封装一下，避免你 squeezing 的字段名不同
@@ -105,15 +120,17 @@ public class LiquidReceiver : MonoBehaviour
         return squeezing != null && squeezing.isSqueeze;
     }
 
-    private void SetOutputs(bool w, bool f, bool h)
+    private void SetOutputs(bool w, bool f, bool h, bool p)
     {
         watered = w;
         fertilized = f;
         herbicided = h;
+        painted = p;
     }
 
     // 如果你需要外部读取输出，用只读 getter
     public bool Watered => watered;
     public bool Fertilized => fertilized;
     public bool Herbicided => herbicided;
+    public bool Painted => painted;
 }

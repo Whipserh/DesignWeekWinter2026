@@ -10,6 +10,8 @@ TagManager:
   - Herb
   - Plant
   - Paintable
+  - Paint
+  - pound
   layers:
   - Default
   - TransparentFX

@@ -2,19 +2,6 @@ using UnityEngine;
 using System.Collections;
 public class Pond : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        pondWater.transform.localScale = new Vector3(1, waterFill/maxWaterFill,1);
-        //interaction(Liquids.FERTILIZER);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public enum Liquids { WATER, FERTILIZER, HERBICIDE, PAINT }
     private float waterFill = 0;
     public float maxWaterFill = 2;
@@ -23,27 +10,89 @@ public class Pond : MonoBehaviour
     public Color HERBICIDE;
     public Color Paint;
 
+    public LiquidReceiver liquidReciever;
 
-    public void interaction(Liquids liquid)
+    // Edge-trigger memory (avoid calling every frame)
+    private bool _lastWatered;
+    private bool _lastFertilized;
+    private bool _lastHerbicided;
+    private bool _lastPainted;
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        switch (liquid)
+        if (liquidReciever == null)
+            liquidReciever = GetComponent<LiquidReceiver>(); // Find from itself
+        pondWater.transform.localScale = new Vector3(1, waterFill/maxWaterFill,1);
+        //interaction(Liquids.FERTILIZER);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        reciveLiquid();
+    }
+
+    public void reciveLiquid()
+    {
+        if (liquidReciever == null) return;
+
+        // Read outputs from LiquidReceiver (the ONLY driver)
+        bool wateredNow = liquidReciever.Watered;
+        bool fertilizedNow = liquidReciever.Fertilized;
+        bool herbicidedNow = liquidReciever.Herbicided;
+        bool paintedNow = liquidReciever.Painted; // (ADD)
+
+        // Rising-edge trigger: only when false -> true
+        bool waterPressed = wateredNow && !_lastWatered;
+        bool fertPressed = fertilizedNow && !_lastFertilized;
+        bool herbPressed = herbicidedNow && !_lastHerbicided;
+        bool paintPressed = paintedNow && !_lastPainted; // (ADD)
+
+        // Update last states
+        _lastWatered = wateredNow;
+        _lastFertilized = fertilizedNow;
+        _lastHerbicided = herbicidedNow;
+        _lastPainted = paintedNow; // (ADD)
+
+        // If multiple become true in same frame, pick a priority.
+        // (Usually only one should be true anyway.)
+        if (paintPressed)
         {
-            case Liquids.WATER://grow when water is added
-                pondWater.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = Water;
-                break;
-            case Liquids.FERTILIZER:
-                pondWater.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = FerTILIZER;
-                break;
-            case Liquids.HERBICIDE://shrink when herbicide is added
-                pondWater.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = HERBICIDE;
-                break;
-            case Liquids.PAINT: 
-                pondWater.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = Paint;
-                break;
+            poundInteraction(Liquids.PAINT);
         }
-        waterFill = (waterFill+1)% maxWaterFill;
-        //Debug.Log(waterFill / maxWaterFill);
-        StartCoroutine(growShrink(waterFill/maxWaterFill, 1));
+        else if (herbPressed)
+        {
+            poundInteraction(Liquids.HERBICIDE);
+        }
+        else if (fertPressed)
+        {
+            poundInteraction(Liquids.FERTILIZER);
+        }
+        else if (waterPressed)
+        {
+            poundInteraction(Liquids.WATER);
+        }
+    }
+
+
+
+    public void poundInteraction(Liquids liquid)
+    {
+        if (pondWater == null) return;
+
+        // no hardcode color: always follow player's current color
+        var r = pondWater.transform.GetChild(0).gameObject.GetComponent<Renderer>();
+        if (r != null) r.material.color = liquidReciever.color;
+
+        // all liquids can fill the pond (no modulo, so it can reach full)
+        waterFill = Mathf.Clamp(waterFill + 1f, 0f, maxWaterFill);
+
+        float targetY = (maxWaterFill <= 0f) ? 0f : (waterFill / maxWaterFill);
+
+        // if you spam liquids, multiple coroutines can fight; if you want it stable, stop previous one (optional)
+        StartCoroutine(growShrink(targetY, 1));
     }
 
 
