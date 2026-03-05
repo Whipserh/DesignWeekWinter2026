@@ -167,11 +167,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (10)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -229,11 +234,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -289,6 +299,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -421,6 +435,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (11)
@@ -483,11 +501,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -543,6 +566,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -605,6 +632,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -678,6 +709,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -818,6 +853,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -5883,11 +5922,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (9)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5975,7 +6019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
@@ -6201,6 +6245,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (7)
@@ -6261,6 +6309,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -6429,6 +6481,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (1)
@@ -6489,6 +6545,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -6553,6 +6613,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (1)
@@ -6615,11 +6679,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7031,6 +7100,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -7473,6 +7546,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence
@@ -7535,11 +7612,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7595,6 +7677,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -7657,6 +7743,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -7756,11 +7846,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7860,7 +7955,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018677611}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: f6c51332ac7d92541a38fb263b09d2a8, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 71f14a2d79f732f4d9893ef1b911f4ff, type: 2}
 --- !u!114 &1018677618 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9018249871969862650, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
@@ -7985,6 +8080,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (2)
@@ -8045,6 +8144,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -8344,6 +8447,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (1)
@@ -8406,6 +8513,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (5)
@@ -8466,6 +8577,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -8668,6 +8783,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (7)
@@ -8730,6 +8849,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (4)
@@ -8790,6 +8913,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -8863,6 +8990,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -9037,6 +9168,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -9218,6 +9353,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence
@@ -9280,11 +9419,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -9340,6 +9484,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -9407,6 +9555,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -9611,6 +9763,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (10)
@@ -9671,6 +9827,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -9735,6 +9895,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (3)
@@ -9795,6 +9959,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -9859,11 +10027,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -9921,11 +10094,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -9981,6 +10159,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -10259,6 +10441,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
@@ -10831,11 +11017,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4004102511930900490, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4247274267566674759, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: m_Name
       value: fence
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1609869326626726596, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
