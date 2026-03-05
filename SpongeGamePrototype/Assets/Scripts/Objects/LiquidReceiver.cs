@@ -20,6 +20,7 @@ public class LiquidReceiver : MonoBehaviour
     [SerializeField] private bool watered;
     [SerializeField] private bool fertilized;
     [SerializeField] private bool herbicided;
+    [SerializeField] private bool painted;
 
     [Header("Coroutine")]
     public float pollInterval = 0.05f;
@@ -71,12 +72,14 @@ public class LiquidReceiver : MonoBehaviour
         }
     }
 
+    public Color color;
+
     private void GetSignalsOnce()
     {
         // 基础容错
         if (Player == null || squeezing == null || checkliquid == null)
         {
-            SetOutputs(false, false, false);
+            SetOutputs(false, false, false, false);
             return;
         }
 
@@ -89,11 +92,13 @@ public class LiquidReceiver : MonoBehaviour
             watered = checkliquid.waterReady;
             fertilized = checkliquid.fertReady;
             herbicided = checkliquid.herbReady;
+            painted = checkliquid.paintReady;
+            color = checkliquid.paint;
         }
         else
         {
             // 不在范围 / 没有 squeeze => 输出 false（如果你想保持上一次，就删掉这行）
-            SetOutputs(false, false, false);
+            SetOutputs(false, false, false, false);
         }
     }
 
@@ -105,15 +110,17 @@ public class LiquidReceiver : MonoBehaviour
         return squeezing != null && squeezing.isSqueeze;
     }
 
-    private void SetOutputs(bool w, bool f, bool h)
+    private void SetOutputs(bool w, bool f, bool h, bool p)
     {
         watered = w;
         fertilized = f;
         herbicided = h;
+        painted = p;
     }
 
     // 如果你需要外部读取输出，用只读 getter
     public bool Watered => watered;
     public bool Fertilized => fertilized;
     public bool Herbicided => herbicided;
+    public bool Painted => painted;
 }

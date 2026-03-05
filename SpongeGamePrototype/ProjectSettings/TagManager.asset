@@ -10,6 +10,7 @@ TagManager:
   - Herb
   - Plant
   - Paintable
+  - Paint
   layers:
   - Default
   - TransparentFX

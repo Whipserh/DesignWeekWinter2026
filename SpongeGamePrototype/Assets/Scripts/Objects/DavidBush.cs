@@ -41,6 +41,7 @@ public class DavidBush : MonoBehaviour
         bool wateredNow = LiquidReceiver.Watered;
         bool fertilizedNow = LiquidReceiver.Fertilized;
         bool herbicidedNow = LiquidReceiver.Herbicided;
+        
 
         // Rising-edge trigger: only when false -> true
         bool waterPressed = wateredNow && !_lastWatered;
