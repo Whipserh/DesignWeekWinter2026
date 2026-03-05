@@ -3571,7 +3571,7 @@ MonoBehaviour:
   controller: {fileID: 135756641613574976}
   requireSqueezePress: 0
   idleColorTolerance: 0.02
-  particlesSystem: {fileID: 0}
+  particlesSystem: {fileID: 463767506}
   syncParticleAlpha: 1
   isSqueeze: 0
 --- !u!1001 &1152859231
