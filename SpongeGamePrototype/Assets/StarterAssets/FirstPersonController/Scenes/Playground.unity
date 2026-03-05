@@ -379,13 +379,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: pound
       objectReference: {fileID: 0}
+    - target: {fileID: 8355093989745161321, guid: 62254f08947abd14182d41ad20ac0387, type: 3}
+      propertyPath: squeezing
+      value: 
+      objectReference: {fileID: 1147385129}
+    - target: {fileID: 8355093989745161321, guid: 62254f08947abd14182d41ad20ac0387, type: 3}
+      propertyPath: checkliquid
+      value: 
+      objectReference: {fileID: 1147385127}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2144811018033075347, guid: 62254f08947abd14182d41ad20ac0387, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 510704607}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62254f08947abd14182d41ad20ac0387, type: 3}
 --- !u!1001 &136500768
 PrefabInstance:
@@ -841,7 +846,7 @@ PrefabInstance:
     - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1726028674}
     - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: squeezing
       value: 
@@ -997,7 +1002,7 @@ PrefabInstance:
     - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1726028674}
     - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: squeezing
       value: 
@@ -1095,6 +1100,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461295052}
   m_CullTransparentMesh: 1
+--- !u!198 &463767506 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5434369854531435806, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 5393215579111688471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &487721300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1162,34 +1172,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
   m_PrefabInstance: {fileID: 487721300}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &510704601 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2144811018033075347, guid: 62254f08947abd14182d41ad20ac0387, type: 3}
-  m_PrefabInstance: {fileID: 106531431}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &510704607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510704601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c8501fe89545e244a8c784a61fc76fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LiquidReceiver
-  Sponge: {fileID: 0}
-  LiquidController: {fileID: 0}
-  range: 5
-  squeezing: {fileID: 1147385129}
-  checkliquid: {fileID: 1147385127}
-  watered: 0
-  fertilized: 0
-  herbicided: 0
-  painted: 0
-  pollInterval: 0.05
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &520086398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1331,7 +1313,7 @@ PrefabInstance:
     - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521660050}
     - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: squeezing
       value: 
@@ -2981,7 +2963,7 @@ PrefabInstance:
     - target: {fileID: 4616837177053722197, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1521660050}
     - target: {fileID: 4616837177053722197, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
       propertyPath: watered
       value: 0
@@ -3086,34 +3068,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
   m_PrefabInstance: {fileID: 1005482030}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1010565473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7728857514442164127, guid: 82601f66fdf39ed4588480e948555e87, type: 3}
-  m_PrefabInstance: {fileID: 6230915069645372566}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1010565474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010565473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c8501fe89545e244a8c784a61fc76fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LiquidReceiver
-  Sponge: {fileID: 0}
-  LiquidController: {fileID: 0}
-  range: 2
-  squeezing: {fileID: 1147385129}
-  checkliquid: {fileID: 1147385127}
-  watered: 0
-  fertilized: 0
-  herbicided: 0
-  painted: 0
-  pollInterval: 0.05
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1018677611 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
@@ -3617,7 +3571,7 @@ MonoBehaviour:
   controller: {fileID: 135756641613574976}
   requireSqueezePress: 0
   idleColorTolerance: 0.02
-  particlesSystem: {fileID: 0}
+  ps: {fileID: 463767506}
   syncParticleAlpha: 1
   isSqueeze: 0
 --- !u!1001 &1152859231
@@ -4231,6 +4185,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
   m_PrefabInstance: {fileID: 1460901023}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1521660050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 600990358011821714, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 5393215579111688471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1538794585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4683,6 +4642,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3583328039687703037, guid: 40a8a647d7e72df4683d942e8de908ba, type: 3}
   m_PrefabInstance: {fileID: 1715654981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1726028674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5037753609168389086, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 5393215579111688471}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1728553733
 GameObject:
@@ -5719,10 +5683,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4591172205593624577, guid: 50f08ccd14f285249b2fab1cbc46e40b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7553207264208707524, guid: 50f08ccd14f285249b2fab1cbc46e40b, type: 3}
       propertyPath: paintColor.a
       value: 1
@@ -5837,29 +5797,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 639222115020036329, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 639222115020036329, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 639222115020036329, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 639222115020036329, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 813134091719457934, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: m_Name
       value: Bush
-      objectReference: {fileID: 0}
-    - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
-      propertyPath: Player
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2273359237163344318, guid: 051a772f4858ed442821a89c76bfd669, type: 3}
       propertyPath: squeezing
@@ -6303,6 +6243,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7297985643206988413, guid: 82601f66fdf39ed4588480e948555e87, type: 3}
+      propertyPath: squeezing
+      value: 
+      objectReference: {fileID: 1147385129}
+    - target: {fileID: 7297985643206988413, guid: 82601f66fdf39ed4588480e948555e87, type: 3}
+      propertyPath: checkliquid
+      value: 
+      objectReference: {fileID: 1147385127}
     - target: {fileID: 7728857514442164127, guid: 82601f66fdf39ed4588480e948555e87, type: 3}
       propertyPath: m_Name
       value: Flower
@@ -6350,10 +6298,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7728857514442164127, guid: 82601f66fdf39ed4588480e948555e87, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1010565474}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82601f66fdf39ed4588480e948555e87, type: 3}
 --- !u!1001 &7288094137546172433
 PrefabInstance:

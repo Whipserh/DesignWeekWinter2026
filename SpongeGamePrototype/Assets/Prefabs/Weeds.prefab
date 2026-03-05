@@ -79,14 +79,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8501fe89545e244a8c784a61fc76fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LiquidReceiver
-  Player: {fileID: 0}
+  Sponge: {fileID: 0}
+  LiquidController: {fileID: 0}
   range: 2
   squeezing: {fileID: 0}
   checkliquid: {fileID: 0}
   watered: 0
   fertilized: 0
   herbicided: 0
+  painted: 0
   pollInterval: 0.05
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2952114778436725309
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -69,14 +69,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8501fe89545e244a8c784a61fc76fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LiquidReceiver
-  Player: {fileID: 0}
+  Sponge: {fileID: 0}
+  LiquidController: {fileID: 0}
   range: 2.2
   squeezing: {fileID: 0}
   checkliquid: {fileID: 0}
   watered: 0
   fertilized: 0
   herbicided: 0
+  painted: 0
   pollInterval: 0.05
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2765091520375857347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DavidBush
   LiquidReceiver: {fileID: 0}
-  bushLeaves: {fileID: 0}
+  bushLeaves: {fileID: 258158238689100371}
   bushHealth: 0
   maxBushHealth: 2
   growShrinkRate: 2
@@ -159,6 +162,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10085746de86c1040a464c7feed62c8e, type: 3}
+--- !u!1 &258158238689100371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 10085746de86c1040a464c7feed62c8e, type: 3}
+  m_PrefabInstance: {fileID: 1104578576871243522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &639222115020036329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 10085746de86c1040a464c7feed62c8e, type: 3}
