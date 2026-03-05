@@ -29,26 +29,20 @@ public class LiquidReceiver : MonoBehaviour
 
     private void Start()
     {
-        // Auto-find if not assigned (optional)
         if (Player == null)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) Player = p;
         }
 
-        if (squeezing == null)
+        if (Player != null)
         {
-            // 如果 squeezing 在 Player 上
-            if (Player != null) squeezing = Player.GetComponent<Squeezing>();
+            if (squeezing == null) squeezing = Player.GetComponentInChildren<Squeezing>(true);
+            if (checkliquid == null) checkliquid = Player.GetComponentInChildren<CheckLiquid>(true);
         }
 
-        if (checkliquid == null)
-        {
-            // 如果 checkliquid 在 Player 上
-            if (Player != null) checkliquid = Player.GetComponent<CheckLiquid>();
-        }
+        Debug.Log($"[LiquidReceiver] Player={Player?.name} squeezing={squeezing?.name} checkliquid={checkliquid?.name}");
 
-        // 启动协程
         signalRoutine = StartCoroutine(GetSignalsLoop());
     }
 
@@ -76,7 +70,10 @@ public class LiquidReceiver : MonoBehaviour
 
     private void GetSignalsOnce()
     {
-        // 基础容错
+
+        Debug.Log($"[ReceiverRefs] Player={(Player != null)} squeezing={(squeezing != null)} checkliquid={(checkliquid != null)}");
+        Debug.Log($"[ReceiverGate] dist={Vector3.Distance(Player.transform.position, transform.position):F2} squeeze={IsSqueezing()}");
+
         if (Player == null || squeezing == null || checkliquid == null)
         {
             SetOutputs(false, false, false, false);
@@ -84,22 +81,16 @@ public class LiquidReceiver : MonoBehaviour
         }
 
         float distance = Vector3.Distance(Player.transform.position, transform.position);
+        if (distance >= range) return;
+        if (!IsSqueezing()) return;
 
-        if (distance < range && IsSqueezing())
-        {
-            // 读取 checkliquid 的状态
-            // 这里按你给的字段名写：waterReady / fertReady / herbReady
-            watered = checkliquid.waterReady;
-            fertilized = checkliquid.fertReady;
-            herbicided = checkliquid.herbReady;
-            painted = checkliquid.paintReady;
-            color = checkliquid.paint;
-        }
-        else
-        {
-            // 不在范围 / 没有 squeeze => 输出 false（如果你想保持上一次，就删掉这行）
-            SetOutputs(false, false, false, false);
-        }
+        watered = checkliquid.waterReady;
+        fertilized = checkliquid.fertReady;
+        herbicided = checkliquid.herbReady;
+        painted = checkliquid.paintReady;
+
+        // 颜色：用 UI 当前色最稳（避免 paint 字段没赋值）
+        if (checkliquid.uiImage != null) color = checkliquid.uiImage.color;
     }
 
     // 这里封装一下，避免你 squeezing 的字段名不同

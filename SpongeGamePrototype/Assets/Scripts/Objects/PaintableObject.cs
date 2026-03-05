@@ -5,6 +5,7 @@ public class PaintableObject : MonoBehaviour
     public LiquidReceiver LiquidReceiver;
     private Renderer render;
     public enum Liquids { WATER, FERTILIZER, HERBICIDE, PAINT }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,10 +42,15 @@ public class PaintableObject : MonoBehaviour
         _lastWatered = wateredNow;
         _lastFertilized = fertilizedNow;
         _lastHerbicided = herbicidedNow;
+        _lastPainted = paintedNow; // (FIX) you must track painted too
 
         // If multiple become true in same frame, pick a priority.
         // (Usually only one should be true anyway.)
-        if (herbPressed)
+        if (paintPressed) // (FIX) paint was never handled before
+        {
+            interact(Liquids.PAINT, LiquidReceiver.color);
+        }
+        else if (herbPressed)
         {
             interact(Liquids.HERBICIDE, LiquidReceiver.color);
         }
@@ -58,18 +64,21 @@ public class PaintableObject : MonoBehaviour
         }
     }
 
-
-
-
     public void interact(Liquids liquid, Color color)
     {
-        switch(liquid) {
-            case Liquids.HERBICIDE:return;
+        switch (liquid)
+        {
+            case Liquids.HERBICIDE: return;
             case Liquids.FERTILIZER: return;
+
             case Liquids.PAINT:
                 paint(color);
                 break;
-            case Liquids.WATER: paint(new Color(0,0,0)); break;
+
+            // Unity Color is 0..1, so use Color.white instead of (255,255,255)
+            case Liquids.WATER:
+                paint(Color.white);
+                break;
         }
     }
 
