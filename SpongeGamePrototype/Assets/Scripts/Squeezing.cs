@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+ * This class exclusively hands the particles and UI when the player squeezes the sponge
+ */
+
+
+
 public class Squeezing : MonoBehaviour
 {
     [Header("Refs")]
@@ -11,7 +17,7 @@ public class Squeezing : MonoBehaviour
     [Range(0f, 0.2f)] public float idleColorTolerance = 0.02f; // how close counts as "idleColor"
 
     [Header("Particle")]
-    public ParticleSystem ps;              // the particle system to start/stop
+    public ParticleSystem particlesSystem;              // the particle system to start/stop
     public bool syncParticleAlpha = true;  // keep alpha from UI color
 
     [Header("isSqueeze")]
@@ -19,27 +25,29 @@ public class Squeezing : MonoBehaviour
 
     void Awake()
     {
-        if (ps == null) ps = GetComponent<ParticleSystem>();
-        if (ps != null) ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (particlesSystem == null) particlesSystem = GetComponent<ParticleSystem>();
+        if (particlesSystem != null) particlesSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
+
+    void Start()
+    {
+        checkLiquid = GetComponent<CheckLiquid>();
+    }
+
 
     void Update()
     {
+        if (particlesSystem == null) return;
 
-
-        if (ps == null) return;
-
-        bool nearBucket = (checkLiquid != null) && checkLiquid.nearBucket;
-
-        bool squeeze = false;
-        if (controller != null)
-            squeeze = requireSqueezePress ? controller.isSpongePress() : controller.isSpongeHeld();
+      
 
         // If we cannot read color state, treat as idle (more conservative).
         bool isIdleColor = true;
         Color currentColor = Color.white;
 
-        if (checkLiquid != null && checkLiquid.uiImage != null)
+
+        
+        if (checkLiquid.uiImage != null)
         {
             currentColor = checkLiquid.uiImage.color;
 
@@ -54,29 +62,37 @@ public class Squeezing : MonoBehaviour
 
             isIdleColor = diff <= idleColorTolerance;
         }
+        
+        //this references the squeeze
+        bool squeeze = false;
+        if (controller != null)
+            squeeze = requireSqueezePress ? controller.isSpongePress() : controller.isSpongeHeld();
+        else Debug.LogError("There was no controller attached.");
+
+
+
 
         // Show condition => start particle; otherwise stop it.
-        bool show = (!nearBucket) && squeeze && (!isIdleColor);
-        isSqueeze = show;
-        if (show)
+        isSqueeze = (!checkLiquid.nearBucket) && squeeze && (!isIdleColor);
+        if (isSqueeze)
         {
             // Sync particle color to current UI color
-            if (checkLiquid != null && checkLiquid.uiImage != null)
+            if (checkLiquid.uiImage != null)
             {
                 Color c = currentColor;
                 if (!syncParticleAlpha) c.a = 1f;
 
-                var main = ps.main;
+                var main = particlesSystem.main;
                 main.startColor = c;
             }
 
-            if (!ps.isPlaying)
-                ps.Play(true);
+            if (!particlesSystem.isPlaying)
+                particlesSystem.Play(true);
         }
         else
         {
-            if (ps.isPlaying)
-                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (particlesSystem.isPlaying)
+                particlesSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
     

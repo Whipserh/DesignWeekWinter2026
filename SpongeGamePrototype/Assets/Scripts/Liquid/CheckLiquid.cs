@@ -27,10 +27,7 @@ public class CheckLiquid : MonoBehaviour
 
     private Coroutine _colorRoutine;
 
-    [Header("Facing")]
-    public Collider CurrentAimCollider { get; private set; }
-    public Transform CurrentAimTransform { get; private set; }
-    public bool HasValidAim => CurrentAimCollider != null;
+    
 
     // Remember the last "completed" color. If player releases before completion, we revert back to this color.
     private Color _lastCommittedColor;
@@ -100,25 +97,18 @@ public class CheckLiquid : MonoBehaviour
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (!Physics.Raycast(ray, out RaycastHit hit, maxAimDistance, targetLayers, QueryTriggerInteraction.Ignore))
         {
-            CurrentAimCollider = null;
-            CurrentAimTransform = null;
-
             SetLabel(false, "");
             SetAllAtFalse();
             HandleReleaseOrInvalidState();
             _spongeHeldLastFrame = false;
             return;
         }
-        //CurrentAimCollider = hit.collider;
-        //CurrentAimTransform = hit.transform;
+
         // 2) Get Enemy type including the parent
         EnemyType enemy = null;
         if (!hit.collider.TryGetComponent(out enemy))
         {
             enemy = hit.collider.GetComponentInParent<EnemyType>();
-           
-
-
         }
    
 
@@ -177,13 +167,13 @@ public class CheckLiquid : MonoBehaviour
 
         // Detect release this frame.
         bool releasedThisFrame = _spongeHeldLastFrame && !spongeHeld;
-
+        /**
         if (releasedThisFrame)
         {
             // Reverse ONLY if we were mid-forward and NOT completed.
             StartReverseToCommittedIfNeeded();
         }
-
+        **/
         if (spongeHeld)
         {
             // Start/continue coloring toward current enemy kind.
@@ -198,7 +188,7 @@ public class CheckLiquid : MonoBehaviour
     private void HandleReleaseOrInvalidState()
     {
         // Do NOT reverse if already completed (keep full color and progress locked at 1).
-        StartReverseToCommittedIfNeeded();
+        //StartReverseToCommittedIfNeeded();
         _spongeHeldLastFrame = false;
     }
 
@@ -302,6 +292,7 @@ public class CheckLiquid : MonoBehaviour
         _colorRoutine = StartCoroutine(CoLerpColorForward(kind, GetKindColor(kind), colorLerpTime));
     }
 
+    /**
     // Reverse ONLY when we are mid-forward and progress is not complete.
     private void StartReverseToCommittedIfNeeded()
     {
@@ -328,6 +319,7 @@ public class CheckLiquid : MonoBehaviour
 
         _colorRoutine = StartCoroutine(CoLerpColorReverse(_lastCommittedColor, colorLerpTime, startProgress));
     }
+    */
 
     private System.Collections.IEnumerator CoLerpColorForward(EnemyKind kind, Color target, float duration)
     {
