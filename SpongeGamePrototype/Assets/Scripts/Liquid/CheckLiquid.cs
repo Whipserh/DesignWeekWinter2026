@@ -87,8 +87,7 @@ public class CheckLiquid : MonoBehaviour
             SetAllAtFalse();
 
             // If we lose refs mid-transition, treat it like a release.
-            HandleReleaseOrInvalidState();
-
+            
             _spongeHeldLastFrame = false;
             return;
         }
@@ -99,7 +98,7 @@ public class CheckLiquid : MonoBehaviour
         {
             SetLabel(false, "");
             SetAllAtFalse();
-            HandleReleaseOrInvalidState();
+            
             _spongeHeldLastFrame = false;
             return;
         }
@@ -117,8 +116,6 @@ public class CheckLiquid : MonoBehaviour
             SetLabel(false, "");
             SetAllAtFalse();
 
-            HandleReleaseOrInvalidState();
-
             _spongeHeldLastFrame = false;
             return;
         }
@@ -130,8 +127,6 @@ public class CheckLiquid : MonoBehaviour
             SetLabel(false, "");
             SetAllAtFalse();
 
-            HandleReleaseOrInvalidState();
-
             _spongeHeldLastFrame = false;
             return;
         }
@@ -142,8 +137,6 @@ public class CheckLiquid : MonoBehaviour
         {
             SetLabel(false, "");
             SetAllAtFalse();
-
-            HandleReleaseOrInvalidState();
 
             _spongeHeldLastFrame = false;
             return;
@@ -163,10 +156,9 @@ public class CheckLiquid : MonoBehaviour
         }
 
         // 5) Changing color when the player squeeze
-        bool spongeHeld = (controller != null) && controller.isSpongeHeld();
-
+        
         // Detect release this frame.
-        bool releasedThisFrame = _spongeHeldLastFrame && !spongeHeld;
+        //bool releasedThisFrame = _spongeHeldLastFrame && !spongeHeld; //controller.isSpongeReleased();
         /**
         if (releasedThisFrame)
         {
@@ -174,23 +166,18 @@ public class CheckLiquid : MonoBehaviour
             StartReverseToCommittedIfNeeded();
         }
         **/
-        if (spongeHeld)
+        if ((controller != null) && controller.isSpongeHeld())
         {
             // Start/continue coloring toward current enemy kind.
             // IMPORTANT: if already completed for this kind, this will do nothing (no restart, no loop).
             StartSmoothColorTo(enemy.kind);
+            _spongeHeldLastFrame = true;
         }
+        else _spongeHeldLastFrame = false;
 
-        _spongeHeldLastFrame = spongeHeld;
     }
 
-    // If we are in an invalid aiming state (or lost refs), treat it like a release.
-    private void HandleReleaseOrInvalidState()
-    {
-        // Do NOT reverse if already completed (keep full color and progress locked at 1).
-        //StartReverseToCommittedIfNeeded();
-        _spongeHeldLastFrame = false;
-    }
+    
 
     void SetAllAtFalse()
     {
