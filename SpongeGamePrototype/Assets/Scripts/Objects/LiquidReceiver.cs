@@ -41,7 +41,7 @@ public class LiquidReceiver : MonoBehaviour
             if (checkliquid == null) checkliquid = Player.GetComponentInChildren<CheckLiquid>(true);
         }
 
-        Debug.Log($"[LiquidReceiver] Player={Player?.name} squeezing={squeezing?.name} checkliquid={checkliquid?.name}");
+      //  Debug.Log($"[LiquidReceiver] Player={Player?.name} squeezing={squeezing?.name} checkliquid={checkliquid?.name}");
 
         signalRoutine = StartCoroutine(GetSignalsLoop());
     }

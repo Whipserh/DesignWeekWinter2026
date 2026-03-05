@@ -35,13 +35,21 @@ public class DavidBush : MonoBehaviour
 
     void Update()
     {
+
+        reciveLiquid();
+
+
+    }
+
+    public void reciveLiquid()
+    {
         if (LiquidReceiver == null) return;
 
         // Read outputs from LiquidReceiver (the ONLY driver)
         bool wateredNow = LiquidReceiver.Watered;
         bool fertilizedNow = LiquidReceiver.Fertilized;
         bool herbicidedNow = LiquidReceiver.Herbicided;
-        
+
 
         // Rising-edge trigger: only when false -> true
         bool waterPressed = wateredNow && !_lastWatered;
@@ -52,7 +60,6 @@ public class DavidBush : MonoBehaviour
         _lastWatered = wateredNow;
         _lastFertilized = fertilizedNow;
         _lastHerbicided = herbicidedNow;
-
         // If multiple become true in same frame, pick a priority.
         // (Usually only one should be true anyway.)
         if (herbPressed)
@@ -68,6 +75,8 @@ public class DavidBush : MonoBehaviour
             bushInteraction(Liquids.WATER);
         }
     }
+
+
 
     // This is still useful internally, but it's only called by Update above.
     public void bushInteraction(Liquids liquid)
