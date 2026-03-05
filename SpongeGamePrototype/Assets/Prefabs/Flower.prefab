@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8225612971435780770}
   - component: {fileID: 7938631583702687480}
+  - component: {fileID: 7297985643206988413}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -52,6 +53,30 @@ MonoBehaviour:
   flowerDead: {fileID: 8345441203059300014}
   flowerAlive: {fileID: 4066600982944418436}
   flowerBloom: {fileID: 5650499947467330396}
+  liquidReciever: {fileID: 0}
+--- !u!114 &7297985643206988413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728857514442164127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8501fe89545e244a8c784a61fc76fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LiquidReceiver
+  Sponge: {fileID: 0}
+  LiquidController: {fileID: 0}
+  range: 2
+  squeezing: {fileID: 0}
+  checkliquid: {fileID: 0}
+  watered: 0
+  fertilized: 0
+  herbicided: 0
+  painted: 0
+  pollInterval: 0.05
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &3795991179819300821
 PrefabInstance:
   m_ObjectHideFlags: 0

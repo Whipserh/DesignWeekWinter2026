@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cacba780e77b4b44bb4d6abc52c8ae0f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.1180396
+      value: 1.16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cacba780e77b4b44bb4d6abc52c8ae0f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cacba780e77b4b44bb4d6abc52c8ae0f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.026756
+      value: 27.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cacba780e77b4b44bb4d6abc52c8ae0f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -67,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cacba780e77b4b44bb4d6abc52c8ae0f, type: 3}
       propertyPath: m_Name
       value: PaintBucketYellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cacba780e77b4b44bb4d6abc52c8ae0f, type: 3}
+      propertyPath: m_TagString
+      value: Paint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -117,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607b900f375b77242949dd82496b4b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyType
-  paintColor: {r: 0.98061097, g: 1, b: 0, a: 0}
+  paintColor: {r: 0.98061097, g: 1, b: 0, a: 1}
   kind: 3
