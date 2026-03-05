@@ -23,11 +23,14 @@ namespace StarterAssets
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 
+		
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
 		public float Gravity = -15.0f;
+
+	
 
 		[Space(10)]
 		[Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
@@ -57,7 +60,7 @@ namespace StarterAssets
 		private float _cinemachineTargetPitch;
 
 		// player
-		private float _speed;
+		public float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
@@ -101,6 +104,7 @@ namespace StarterAssets
 
 		private void Start()
 		{
+			//audioManagerScript = GetComponent<AudioManager>();
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
@@ -215,7 +219,9 @@ namespace StarterAssets
 		}
 
 		public bool isSpongePress()
+			
 		{
+
 			bool leftNow = LeftTrigHeldNow();
 			bool rightNow = RightTrigHeldNow();
 
