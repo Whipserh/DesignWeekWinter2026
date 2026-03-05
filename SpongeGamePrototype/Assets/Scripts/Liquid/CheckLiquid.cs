@@ -155,7 +155,7 @@ public class CheckLiquid : MonoBehaviour
         SetAllAtFalse(); // Clear first (IMPORTANT: do NOT clear after setting nearBucket)
         nearBucket = true;
 
-        SetLabel(true, enemy.kind.ToString());
+        SetLabel(true, enemy.kind.ToString() + "\n Squeeze L & R triggers");
         switch (enemy.kind)
         {
             case EnemyKind.Water: atWater = true; break;
