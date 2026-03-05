@@ -11,7 +11,8 @@ using UnityEngine;
 public class LiquidReceiver : MonoBehaviour
 {
     [Header("Ref")]
-    public GameObject Player;
+    public GameObject Sponge;
+    public GameObject LiquidController;
     public float range = 2f;
     public Squeezing squeezing;
     public CheckLiquid checkliquid;
@@ -29,16 +30,23 @@ public class LiquidReceiver : MonoBehaviour
 
     private void Start()
     {
-        if (Player == null)
+
+        if (Sponge == null)
         {
             var p = GameObject.FindGameObjectWithTag("Player");
-            if (p != null) Player = p;
+            if (p != null) Sponge = p;
         }
 
-        if (Player != null)
+        if (LiquidController == null)
         {
-            if (squeezing == null) squeezing = Player.GetComponentInChildren<Squeezing>(true);
-            if (checkliquid == null) checkliquid = Player.GetComponentInChildren<CheckLiquid>(true);
+            var l = GameObject.FindGameObjectWithTag("GameController");
+            if (l != null) LiquidController = l ;
+        }
+
+        if (LiquidController != null)
+        {
+            if (squeezing == null) squeezing = LiquidController.GetComponentInChildren<Squeezing>(true);
+            if (checkliquid == null) checkliquid = LiquidController.GetComponentInChildren<CheckLiquid>(true);
         }
 
       //  Debug.Log($"[LiquidReceiver] Player={Player?.name} squeezing={squeezing?.name} checkliquid={checkliquid?.name}");
@@ -71,23 +79,34 @@ public class LiquidReceiver : MonoBehaviour
     private void GetSignalsOnce()
     {
 
-        Debug.Log($"[ReceiverRefs] Player={(Player != null)} squeezing={(squeezing != null)} checkliquid={(checkliquid != null)}");
-        Debug.Log($"[ReceiverGate] dist={Vector3.Distance(Player.transform.position, transform.position):F2} squeeze={IsSqueezing()}");
+       
 
-        if (Player == null || squeezing == null || checkliquid == null)
+        if (LiquidController == null || squeezing == null || checkliquid == null)
         {
             SetOutputs(false, false, false, false);
             return;
         }
 
-        float distance = Vector3.Distance(Player.transform.position, transform.position);
+        float distance = Vector3.Distance(Sponge.transform.position, transform.position);
         if (distance >= range) return;
-        if (!IsSqueezing()) return;
-
-        watered = checkliquid.waterReady;
-        fertilized = checkliquid.fertReady;
-        herbicided = checkliquid.herbReady;
-        painted = checkliquid.paintReady;
+        if (distance < range && IsSqueezing())
+        {
+            // read color status
+            watered = checkliquid.waterReady;
+            fertilized = checkliquid.fertReady;
+            herbicided = checkliquid.herbReady;
+            painted = checkliquid.paintReady;
+            color = checkliquid.uiImage != null ? checkliquid.uiImage.color : checkliquid.paint;
+        }
+        else
+        {
+            // only clear outputs when THIS receiver object is a "pound"
+            if (CompareTag("pound"))
+            {
+                SetOutputs(false, false, false, false);
+            }
+            // otherwise: keep last outputs (do nothing)
+        }
 
         // 颜色：用 UI 当前色最稳（避免 paint 字段没赋值）
         if (checkliquid.uiImage != null) color = checkliquid.uiImage.color;
