@@ -8,7 +8,7 @@ public class CheckLiquid : MonoBehaviour
     public Camera cam;
     public LayerMask targetLayers;   // Now is everything, but we can shrink to certain object types
     public TMP_Text label;
-    public Image uiImage;              // The coloring UI Image
+    public Image uiImage;              // 要变色的 UI Image
     public StarterAssets.FirstPersonController controller; // 用来读 isSpongeHeld()
 
     [Header("Rules")]
@@ -17,10 +17,10 @@ public class CheckLiquid : MonoBehaviour
     [Range(-1f, 1f)] public float facingDot = 0.85f; // A facting clamp
 
     [Header("Colors")]
-    public Color waterColor = new Color(0.2f, 0.5f, 1f, 1f);      // blue
-    public Color fertColor = new Color(1f, 0.65f, 0.15f, 1f);    // orange
-    public Color herbColor = new Color(0.55f, 0.05f, 0.05f, 1f); // dark red
-    public Color idleColor = new Color(1f, 1f, 1f, 0.15f);       // defult
+    public Color waterColor = new Color(0.2f, 0.5f, 1f, 1f);      // 蓝
+    public Color fertColor = new Color(1f, 0.65f, 0.15f, 1f);    // 橘黄
+    public Color herbColor = new Color(0.55f, 0.05f, 0.05f, 1f); // 深红
+    public Color idleColor = new Color(1f, 1f, 1f, 0.15f);       // 默认（可改）
 
     public float colorLerpTime = 0.6f;
 
@@ -88,7 +88,7 @@ public class CheckLiquid : MonoBehaviour
             return;
         }
 
-        // 1) Aiming Detection Ray(ViewPort)
+        // 1) 瞄准检测
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (!Physics.Raycast(ray, out RaycastHit hit, maxAimDistance, targetLayers, QueryTriggerInteraction.Ignore))
         {
@@ -101,7 +101,7 @@ public class CheckLiquid : MonoBehaviour
             return;
         }
 
-        // 2) Get Enemy type including the parent
+        // 2) 取 EnemyType（支持挂在父物体）
         EnemyType enemy = null;
         if (!hit.collider.TryGetComponent(out enemy))
             enemy = hit.collider.GetComponentInParent<EnemyType>();
@@ -117,7 +117,7 @@ public class CheckLiquid : MonoBehaviour
             return;
         }
 
-        // 3) Distance + facing
+        // 3) 距离 + 面向
         float dist = Vector3.Distance(transform.position, enemy.transform.position);
         if (dist > requireNearDistance)
         {
@@ -143,7 +143,7 @@ public class CheckLiquid : MonoBehaviour
             return;
         }
 
-        // 4) Satify conditions：Show words + Show bool
+        // 4) 满足条件：显示文字 + 设置 bool
         SetAllAtFalse(); // Clear first (IMPORTANT: do NOT clear after setting nearBucket)
         nearBucket = true;
 
@@ -155,7 +155,7 @@ public class CheckLiquid : MonoBehaviour
             case EnemyKind.Herbicide: atHerb = true; break;
         }
 
-        // 5) Changing color when the player squeeze
+        // 5) 挤压海绵时变色
         bool spongeHeld = (controller != null) && controller.isSpongeHeld();
 
         // Detect release this frame.
