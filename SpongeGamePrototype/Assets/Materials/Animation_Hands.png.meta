@@ -166,12 +166,12 @@ TextureImporter:
       name: Animation_Hands_3
       rect:
         serializedVersion: 2
-        x: 3150
+        x: 3100
         y: 0
-        width: 803
+        width: 853
         height: 1117
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.45072493, y: 0.49727523}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,12 +188,12 @@ TextureImporter:
       name: Animation_Hands_5
       rect:
         serializedVersion: 2
-        x: 4155
+        x: 4083
         y: 0
-        width: 774
+        width: 846
         height: 1117
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.43708175, y: 0.50000006}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

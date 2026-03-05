@@ -2878,7 +2878,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -2886,7 +2886,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 0.54905653, g: 1, b: 0.9735178, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -2911,7 +2911,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
@@ -8881,15 +8881,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   label: {fileID: 751969889}
-  uiImage: {fileID: 461295054}
+  uiImage: {fileID: 1651426618}
   controller: {fileID: 135756641613574976}
   maxAimDistance: 8
   requireNearDistance: 3
   facingDot: 0.85
-  waterColor: {r: 0.2, g: 0.5, b: 1, a: 1}
-  fertColor: {r: 1, g: 0.65, b: 0.15, a: 1}
-  herbColor: {r: 0.55, g: 0.05, b: 0.05, a: 1}
-  idleColor: {r: 0.9245283, g: 0.9245283, b: 0.3285273, a: 1}
+  waterColor: {r: 0.435849, g: 0.64856154, b: 1, a: 1}
+  fertColor: {r: 0.5046815, g: 1, b: 0.3679244, a: 1}
+  herbColor: {r: 0.4716981, g: 0.16998932, b: 0.16998932, a: 1}
+  idleColor: {r: 1, g: 1, b: 0.8660377, a: 1}
   colorLerpTime: 0.7
   nearBucket: 0
   atWater: 0
