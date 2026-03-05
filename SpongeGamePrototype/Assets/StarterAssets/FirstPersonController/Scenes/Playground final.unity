@@ -2838,6 +2838,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PaintBucketBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b2ae6048b45385343948edac495d6d09, type: 3}
+      propertyPath: m_TagString
+      value: Paint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5646,6 +5650,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 83fd5a302befa4646aa5bdb14ed92b5b, type: 3}
       propertyPath: m_Name
       value: PaintBucketRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83fd5a302befa4646aa5bdb14ed92b5b, type: 3}
+      propertyPath: m_TagString
+      value: Paint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10189,6 +10197,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fdc9f9d0df9183540852e3ed8e1a9f9f, type: 3}
       propertyPath: m_Name
       value: Rock1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fdc9f9d0df9183540852e3ed8e1a9f9f, type: 3}
+      propertyPath: m_TagString
+      value: Paintable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
