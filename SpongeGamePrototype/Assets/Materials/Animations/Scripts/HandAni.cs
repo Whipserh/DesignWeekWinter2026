@@ -2,32 +2,27 @@ using UnityEngine;
 
 public class HandAni : MonoBehaviour
 {
-    int i = 0;
     public Animator animator;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [Header("Refs")]
+    public CheckLiquid checkLiquid; // use CheckLiquid.isAbsorbing
+    public Squeezing squeezing;     // still used for isSqueeze (releasing)
+
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B)) //when the a key is pressed
-        {
-            if (i == 0) {
-                animator.SetBool("isAbsorbing", true); //abosrb animation plays
-                animator.SetBool("isSqueezing", false);
-                i++;
-            }
-            else
-            {
-                animator.SetBool("isSqueezing", true); //squeeazing animation plays
-                animator.SetBool("isAbsorbing", false);
-                i = 0;
-            }
-        }
-        
+        if (animator == null) return;
 
+        // Absorb animation uses CheckLiquid.cs public bool isAbsorbing
+        bool absorbing = (checkLiquid != null) && checkLiquid.isAbsorbing;
+        animator.SetBool("isAbsorbing", absorbing);
+
+        // Squeeze animation (releasing water) still uses Squeezing.isSqueeze
+        bool squeezingNow = (squeezing != null) && squeezing.isSqueeze;
+        animator.SetBool("isSqueezing", squeezingNow);
     }
 }

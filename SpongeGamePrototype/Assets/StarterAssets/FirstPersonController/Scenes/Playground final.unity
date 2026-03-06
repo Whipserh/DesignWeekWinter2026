@@ -4989,6 +4989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandAni
   animator: {fileID: 779563333}
+  checkLiquid: {fileID: 1147385127}
+  squeezing: {fileID: 1147385129}
 --- !u!95 &779563333
 Animator:
   serializedVersion: 7
@@ -9675,6 +9677,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandAni
   animator: {fileID: 1334362811}
+  checkLiquid: {fileID: 1147385127}
+  squeezing: {fileID: 1147385129}
 --- !u!95 &1334362811
 Animator:
   serializedVersion: 7
