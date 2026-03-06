@@ -25,7 +25,8 @@ public class SceneChange : MonoBehaviour
 
     public void QuitFuntion()
     {
-        Application.Quit();
         Debug.Log("Quit");
+        Application.Quit();
+        
     }
 }
