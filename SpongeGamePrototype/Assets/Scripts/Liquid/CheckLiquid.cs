@@ -27,7 +27,7 @@ public class CheckLiquid : MonoBehaviour
 
     private Coroutine _colorRoutine;
 
-    
+
 
     // Remember the last "completed" color. If player releases before completion, we revert back to this color.
     private Color _lastCommittedColor;
@@ -51,6 +51,7 @@ public class CheckLiquid : MonoBehaviour
 
     [Header("Absorb Mod")]
     public bool nearBucket;
+    public bool isAbsorbing;
 
     [Header("Aimming Liquid")]
     public bool atWater;
@@ -63,6 +64,14 @@ public class CheckLiquid : MonoBehaviour
     public bool fertReady;
     public bool herbReady;
     public bool paintReady;
+
+    // ---------------- NEW: Sponge Capacity ----------------
+    // 玩家吸满一个 liquid 时：SpongeAmount01 = 1
+    // 玩家 squeeze 喷出：SpongeAmount01 逐渐减少（在 Squeezing 脚本里做）
+    // ready 在吸满时才 true，在喷到 0 时才取消（在 Squeezing 脚本里做）
+    [Header("Sponge Capacity")]
+    [Range(0f, 1f)]
+    public float SpongeAmount01 = 0f;
 
     void Awake()
     {
@@ -77,6 +86,9 @@ public class CheckLiquid : MonoBehaviour
         // Initial progress is 0.
         ColorProgress01 = 0f;
         _completedKind = null;
+
+        // NEW: initial sponge amount is 0
+        SpongeAmount01 = 0f;
     }
 
     void Update()
@@ -87,7 +99,7 @@ public class CheckLiquid : MonoBehaviour
             SetAllAtFalse();
 
             // If we lose refs mid-transition, treat it like a release.
-            
+
             _spongeHeldLastFrame = false;
             return;
         }
@@ -98,7 +110,7 @@ public class CheckLiquid : MonoBehaviour
         {
             SetLabel(false, "");
             SetAllAtFalse();
-            
+
             _spongeHeldLastFrame = false;
             return;
         }
@@ -109,7 +121,7 @@ public class CheckLiquid : MonoBehaviour
         {
             enemy = hit.collider.GetComponentInParent<EnemyType>();
         }
-   
+
 
         if (enemy == null)
         {
@@ -121,24 +133,24 @@ public class CheckLiquid : MonoBehaviour
         }
 
         // 3) Distance + facing
-            Vector3 playerPos =
-         (controller != null) ? controller.transform.position :
-         (cam != null) ? cam.transform.position :
-         transform.position;
-            // 用 collider 最近点，不用 enemy.transform.position（pivot 可能偏）
-            Vector3 closest = hit.collider.ClosestPoint(playerPos);
-            float dist = Vector3.Distance(playerPos, closest);
+        Vector3 playerPos =
+     (controller != null) ? controller.transform.position :
+     (cam != null) ? cam.transform.position :
+     transform.position;
+        // 用 collider 最近点，不用 enemy.transform.position（pivot 可能偏）
+        Vector3 closest = hit.collider.ClosestPoint(playerPos);
+        float dist = Vector3.Distance(playerPos, closest);
 
-            if (dist > requireNearDistance)
-            {
-                SetLabel(false, "");
-                SetAllAtFalse();
-                //HandleReleaseOrInvalidState();
-                _spongeHeldLastFrame = false;
-                return;
-            }
+        if (dist > requireNearDistance)
+        {
+            SetLabel(false, "");
+            SetAllAtFalse();
+            //HandleReleaseOrInvalidState();
+            _spongeHeldLastFrame = false;
+            return;
+        }
 
-         
+
 
         Vector3 toTarget = (enemy.transform.position - cam.transform.position).normalized;
         float dot = Vector3.Dot(cam.transform.forward, toTarget);
@@ -155,7 +167,8 @@ public class CheckLiquid : MonoBehaviour
         SetAllAtFalse(); // Clear first (IMPORTANT: do NOT clear after setting nearBucket)
         nearBucket = true;
 
-        SetLabel(true, enemy.kind.ToString() + "\n Squeeze L & R triggers");
+    //    SetLabel(true, enemy.kind.ToString() + "\n Squeeze L & R triggers");
+        SetLabel(true, enemy.kind.ToString() );
         switch (enemy.kind)
         {
             case EnemyKind.Water: atWater = true; break;
@@ -165,7 +178,7 @@ public class CheckLiquid : MonoBehaviour
         }
 
         // 5) Changing color when the player squeeze
-        
+
         // Detect release this frame.
         //bool releasedThisFrame = _spongeHeldLastFrame && !spongeHeld; //controller.isSpongeReleased();
         /**
@@ -177,8 +190,8 @@ public class CheckLiquid : MonoBehaviour
         **/
         if ((controller != null) && controller.isSpongeReleased())
         {
-            // Start/continue coloring toward current enemy kind.
-            // IMPORTANT: if already completed for this kind, this will do nothing (no restart, no loop).
+            // absorbing start here-}
+            isAbsorbing = true;
 
             Color target = GetTargetColor(enemy);
             StartSmoothColorTo(enemy.kind, target);
@@ -188,7 +201,7 @@ public class CheckLiquid : MonoBehaviour
 
     }
 
-    
+
 
     void SetAllAtFalse()
     {
@@ -347,14 +360,21 @@ public class CheckLiquid : MonoBehaviour
         // Only becomes true when fully colored
         SetReadyBool(kind, true);
 
+        // NEW: Fill complete => Sponge is FULL
+        SpongeAmount01 = 1f;
+
         // Lock completed state to prevent restarting/looping.
         _completedKind = kind;
 
         ColorProgress01 = 1f;
 
+        isAbsorbing = false;//absorbing stopped
+
         _transitionMode = ColorTransitionMode.None;
         _colorRoutine = null;
         _currentTargetKind = null;
+
+        
     }
 
     private System.Collections.IEnumerator CoLerpColorReverse(Color target, float duration, float startProgress01)

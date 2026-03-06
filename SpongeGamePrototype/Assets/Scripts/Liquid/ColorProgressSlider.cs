@@ -15,6 +15,10 @@ public class ColorProgressSlider : MonoBehaviour
     [Header("Sync Color")]
     public bool syncFillColorWithUIImage = true;
 
+    // NEW: use CheckLiquid.isAbsorbing to decide which progress to show
+    [Header("Mode")]
+    public bool useAbsorbingSwitch = true;
+
     void Awake()
     {
         if (slider == null) slider = GetComponent<Slider>();
@@ -37,7 +41,21 @@ public class ColorProgressSlider : MonoBehaviour
     {
         if (slider == null || source == null) return;
 
-        float p = Mathf.Clamp01(source.ColorProgress01);
+        float p;
+
+        if (useAbsorbingSwitch)
+        {
+            // Absorbing: show fill progress (0->1)
+            // Releasing: show remaining sponge amount (1->0)
+            p = source.isAbsorbing ? source.ColorProgress01 : source.SpongeAmount01;
+        }
+        else
+        {
+            // Default: keep old behavior (fill progress)
+            p = source.ColorProgress01;
+        }
+
+        p = Mathf.Clamp01(p);
         slider.value = p;
 
         if (hideWhenIdle)
