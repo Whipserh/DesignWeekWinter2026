@@ -27,8 +27,6 @@ public class CheckLiquid : MonoBehaviour
 
     private Coroutine _colorRoutine;
 
-
-
     // Remember the last "completed" color. If player releases before completion, we revert back to this color.
     private Color _lastCommittedColor;
 
@@ -89,6 +87,7 @@ public class CheckLiquid : MonoBehaviour
 
         // NEW: initial sponge amount is 0
         SpongeAmount01 = 0f;
+        isAbsorbing = false;
     }
 
     void Update()
@@ -99,7 +98,6 @@ public class CheckLiquid : MonoBehaviour
             SetAllAtFalse();
 
             // If we lose refs mid-transition, treat it like a release.
-
             _spongeHeldLastFrame = false;
             return;
         }
@@ -122,7 +120,6 @@ public class CheckLiquid : MonoBehaviour
             enemy = hit.collider.GetComponentInParent<EnemyType>();
         }
 
-
         if (enemy == null)
         {
             SetLabel(false, "");
@@ -134,9 +131,10 @@ public class CheckLiquid : MonoBehaviour
 
         // 3) Distance + facing
         Vector3 playerPos =
-     (controller != null) ? controller.transform.position :
-     (cam != null) ? cam.transform.position :
-     transform.position;
+            (controller != null) ? controller.transform.position :
+            (cam != null) ? cam.transform.position :
+            transform.position;
+
         // 用 collider 最近点，不用 enemy.transform.position（pivot 可能偏）
         Vector3 closest = hit.collider.ClosestPoint(playerPos);
         float dist = Vector3.Distance(playerPos, closest);
@@ -149,8 +147,6 @@ public class CheckLiquid : MonoBehaviour
             _spongeHeldLastFrame = false;
             return;
         }
-
-
 
         Vector3 toTarget = (enemy.transform.position - cam.transform.position).normalized;
         float dot = Vector3.Dot(cam.transform.forward, toTarget);
@@ -167,8 +163,7 @@ public class CheckLiquid : MonoBehaviour
         SetAllAtFalse(); // Clear first (IMPORTANT: do NOT clear after setting nearBucket)
         nearBucket = true;
 
-    //    SetLabel(true, enemy.kind.ToString() + "\n Squeeze L & R triggers");
-        SetLabel(true, enemy.kind.ToString() );
+        SetLabel(true, enemy.kind.ToString());
         switch (enemy.kind)
         {
             case EnemyKind.Water: atWater = true; break;
@@ -178,30 +173,20 @@ public class CheckLiquid : MonoBehaviour
         }
 
         // 5) Changing color when the player squeeze
-
-        // Detect release this frame.
-        //bool releasedThisFrame = _spongeHeldLastFrame && !spongeHeld; //controller.isSpongeReleased();
-        /**
-        if (releasedThisFrame)
-        {
-            // Reverse ONLY if we were mid-forward and NOT completed.
-            StartReverseToCommittedIfNeeded();
-        }
-        **/
         if ((controller != null) && controller.isSpongeReleased())
         {
-            // absorbing start here-}
-            isAbsorbing = true;
+            // FIX: 只有海绵空（或你希望允许“覆盖吸水”时改掉这个条件）才允许开始吸水
+            if (SpongeAmount01 <= 0.0001f)
+            {
+                isAbsorbing = true;
 
-            Color target = GetTargetColor(enemy);
-            StartSmoothColorTo(enemy.kind, target);
-            _spongeHeldLastFrame = true;
+                Color target = GetTargetColor(enemy);
+                StartSmoothColorTo(enemy.kind, target);
+                _spongeHeldLastFrame = true;
+            }
         }
         else _spongeHeldLastFrame = false;
-
     }
-
-
 
     void SetAllAtFalse()
     {
@@ -266,14 +251,15 @@ public class CheckLiquid : MonoBehaviour
         }
     }
 
-    private void StartSmoothColorTo(EnemyKind kind)
+    private void StartSmoothColorTo(EnemyKind kind, Color targetColor)
     {
         if (uiImage == null) return;
 
-        // If already completed for this kind, lock progress at 1 and never restart (prevents looping).
-        if (_completedKind.HasValue && _completedKind.Value == kind)
+        // FIX: only lock while sponge still has liquid. If empty, allow absorb again.
+        if (_completedKind.HasValue && _completedKind.Value == kind && SpongeAmount01 > 0.0001f)
         {
             ColorProgress01 = 1f;
+            isAbsorbing = false; // safety
             return;
         }
 
@@ -295,42 +281,17 @@ public class CheckLiquid : MonoBehaviour
         _completedKind = null;
 
         // Interrupt any existing transition (forward or reverse) and start forward.
-        if (_colorRoutine != null) StopCoroutine(_colorRoutine);
+        if (_colorRoutine != null)
+        {
+            StopCoroutine(_colorRoutine);
+            _colorRoutine = null;
+        }
 
         _transitionMode = ColorTransitionMode.ForwardToTarget;
         ColorProgress01 = 0f;
 
-        _colorRoutine = StartCoroutine(CoLerpColorForward(kind, GetKindColor(kind), colorLerpTime));
+        _colorRoutine = StartCoroutine(CoLerpColorForward(kind, targetColor, colorLerpTime));
     }
-
-    /**
-    // Reverse ONLY when we are mid-forward and progress is not complete.
-    private void StartReverseToCommittedIfNeeded()
-    {
-        if (uiImage == null) return;
-        if (_colorRoutine == null) return;
-
-        // Only reverse if we are currently going forward (unfinished).
-        if (_transitionMode != ColorTransitionMode.ForwardToTarget) return;
-
-        // If already complete, do not reverse.
-        if (ColorProgress01 >= 0.999f) return;
-
-        // Stop forward transition and start reversing back to committed color.
-        StopCoroutine(_colorRoutine);
-        _colorRoutine = null;
-
-        // Transition canceled => not "ready".
-        ResetReadyBools();
-
-        float startProgress = Mathf.Clamp01(ColorProgress01);
-
-        _transitionMode = ColorTransitionMode.ReverseToCommitted;
-        _currentTargetKind = null;
-
-        _colorRoutine = StartCoroutine(CoLerpColorReverse(_lastCommittedColor, colorLerpTime, startProgress));
-    }
-    */
 
     private System.Collections.IEnumerator CoLerpColorForward(EnemyKind kind, Color target, float duration)
     {
@@ -360,7 +321,7 @@ public class CheckLiquid : MonoBehaviour
         // Only becomes true when fully colored
         SetReadyBool(kind, true);
 
-        // NEW: Fill complete => Sponge is FULL
+        // Fill complete => Sponge is FULL
         SpongeAmount01 = 1f;
 
         // Lock completed state to prevent restarting/looping.
@@ -369,44 +330,6 @@ public class CheckLiquid : MonoBehaviour
         ColorProgress01 = 1f;
 
         isAbsorbing = false;//absorbing stopped
-
-        _transitionMode = ColorTransitionMode.None;
-        _colorRoutine = null;
-        _currentTargetKind = null;
-
-        
-    }
-
-    private System.Collections.IEnumerator CoLerpColorReverse(Color target, float duration, float startProgress01)
-    {
-        // Reverse from current color back to committed color.
-        Color start = uiImage.color;
-
-        float t = 0f;
-
-        // Start progress = whatever we had when released (e.g., 0.63), then go down to 0.
-        ColorProgress01 = Mathf.Clamp01(startProgress01);
-
-        while (t < 1f)
-        {
-            t += Time.deltaTime / Mathf.Max(0.0001f, duration);
-            float u = Mathf.Clamp01(t);
-
-            uiImage.color = Color.Lerp(start, target, u);
-
-            // Progress goes from startProgress01 -> 0 (no jump to 1).
-            ColorProgress01 = Mathf.Lerp(startProgress01, 0f, u);
-
-            yield return null;
-        }
-
-        // Snap to committed color at the end.
-        uiImage.color = target;
-
-        // Reverse does not set any ready bools.
-        ResetReadyBools();
-
-        ColorProgress01 = 0f;
 
         _transitionMode = ColorTransitionMode.None;
         _colorRoutine = null;
@@ -425,37 +348,6 @@ public class CheckLiquid : MonoBehaviour
         c.a = 1f;
         return c;
     }
-
-    private void StartSmoothColorTo(EnemyKind kind, Color targetColor)
-    {
-        if (uiImage == null) return;
-
-        if (_completedKind.HasValue && _completedKind.Value == kind)
-        {
-            ColorProgress01 = 1f;
-            return;
-        }
-
-        if (_transitionMode == ColorTransitionMode.ForwardToTarget &&
-            _currentTargetKind.HasValue &&
-            _currentTargetKind.Value == kind &&
-            _colorRoutine != null)
-        {
-            return;
-        }
-
-        _currentTargetKind = kind;
-        ResetReadyBools();
-        _completedKind = null;
-
-        if (_colorRoutine != null) StopCoroutine(_colorRoutine);
-
-        _transitionMode = ColorTransitionMode.ForwardToTarget;
-        ColorProgress01 = 0f;
-
-        _colorRoutine = StartCoroutine(CoLerpColorForward(kind, targetColor, colorLerpTime));
-    }
-
 
     public void OnSpongeEmptied()
     {

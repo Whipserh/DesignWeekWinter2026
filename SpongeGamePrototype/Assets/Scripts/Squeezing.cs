@@ -43,6 +43,7 @@ public class Squeezing : MonoBehaviour
     void Update()
     {
         if (particlesSystem == null) return;
+        if (checkLiquid == null) return;
 
         // If we cannot read color state, treat as idle (more conservative).
         bool isIdleColor = true;
@@ -70,21 +71,18 @@ public class Squeezing : MonoBehaviour
             squeeze = requireSqueezePress ? controller.isSpongePress() : controller.isSpongeHeld();
         else Debug.LogError("There was no controller attached.");
 
-        // ---------------- FIX: Drain condition MUST NOT depend on isIdleColor ----------------
-        bool canDrain = (!checkLiquid.nearBucket) && squeeze && (checkLiquid.SpongeAmount01 > 0f);
+        // FIX: releasing does NOT depend on nearBucket.
+        // Releasing is blocked only while absorbing (coroutine running).
+        bool canDrain = squeeze && (checkLiquid.SpongeAmount01 > 0f) && (!checkLiquid.isAbsorbing);
 
-        // 粒子是否显示，你可以继续用 isIdleColor 作为“视觉门槛”
+        // 粒子显示可以更“苛刻”，但 drain 必须继续
         bool showParticles = canDrain && (!isIdleColor);
 
-        // 这是对外显示的 isSqueeze（你原来用来 debug/看状态的）
         isSqueeze = canDrain;
 
         if (canDrain)
         {
-            // Releasing stage => slider should show SpongeAmount01
-            checkLiquid.isAbsorbing = false;
-
-            // Cache the color at the moment we START draining (so we fade from THIS color back to idle)
+            // Cache drain start color once
             if (!_hasDrainStartColor && checkLiquid.uiImage != null)
             {
                 _drainStartColor = checkLiquid.uiImage.color;
@@ -96,7 +94,6 @@ public class Squeezing : MonoBehaviour
             {
                 float a = Mathf.Clamp01(checkLiquid.SpongeAmount01);
                 Color faded = Color.Lerp(checkLiquid.idleColor, _drainStartColor, a);
-
                 checkLiquid.uiImage.color = faded;
 
                 // Particles follow UI color
@@ -110,7 +107,7 @@ public class Squeezing : MonoBehaviour
                 }
             }
 
-            // Start/Stop particle system based on showParticles
+            // Start/Stop particles
             if (showParticles)
             {
                 if (!particlesSystem.isPlaying)
@@ -122,7 +119,7 @@ public class Squeezing : MonoBehaviour
                     particlesSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
 
-            // Drain sponge amount while squeezing (ALWAYS drains while canDrain)
+            // Drain ALWAYS while canDrain
             checkLiquid.SpongeAmount01 -= drainSpeed * Time.deltaTime;
             checkLiquid.SpongeAmount01 = Mathf.Clamp01(checkLiquid.SpongeAmount01);
 
@@ -137,11 +134,14 @@ public class Squeezing : MonoBehaviour
                 checkLiquid.herbReady = false;
                 checkLiquid.paintReady = false;
 
-                // Ensure exact idle
+                // Ensure exact idle at the end
                 if (checkLiquid.uiImage != null)
                     checkLiquid.uiImage.color = checkLiquid.idleColor;
 
                 _hasDrainStartColor = false;
+
+                // IMPORTANT: unlock CheckLiquid for next absorb cycle
+                checkLiquid.OnSpongeEmptied();
 
                 if (particlesSystem.isPlaying)
                     particlesSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -149,7 +149,6 @@ public class Squeezing : MonoBehaviour
         }
         else
         {
-            // Not draining => stop particles
             if (particlesSystem.isPlaying)
                 particlesSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
