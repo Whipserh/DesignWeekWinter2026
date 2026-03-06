@@ -455,4 +455,30 @@ public class CheckLiquid : MonoBehaviour
 
         _colorRoutine = StartCoroutine(CoLerpColorForward(kind, targetColor, colorLerpTime));
     }
+
+
+    public void OnSpongeEmptied()
+    {
+        // If absorb coroutine is running, stop it
+        if (_colorRoutine != null)
+        {
+            StopCoroutine(_colorRoutine);
+            _colorRoutine = null;
+        }
+
+        // Unlock the "completed" lock so we can absorb again
+        _completedKind = null;
+        _currentTargetKind = null;
+        _transitionMode = ColorTransitionMode.None;
+
+        // Reset fill progress for next absorb cycle
+        ColorProgress01 = 0f;
+
+        // Return to idle visuals
+        _lastCommittedColor = idleColor;
+        SetImageColor(idleColor);
+
+        // Absorb state ends
+        isAbsorbing = false;
+    }
 }
