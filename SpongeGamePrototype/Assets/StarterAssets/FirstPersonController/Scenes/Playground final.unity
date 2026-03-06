@@ -7624,9 +7624,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   playerAudio: {fileID: 5393215579111688473}
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: f1b95619f1d0b7c4da881b0362707970, type: 3}
+  - {fileID: 8300000, guid: ca75caceafad3e34a9ac2576822b9e6d, type: 3}
+  - {fileID: 8300000, guid: 7b80af4fc5c1dcb4ca76f805a3beac56, type: 3}
   playerScript: {fileID: 135756641613574976}
 --- !u!4 &1111512835
 Transform:
