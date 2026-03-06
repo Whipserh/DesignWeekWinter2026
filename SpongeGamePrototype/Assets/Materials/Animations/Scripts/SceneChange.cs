@@ -1,3 +1,4 @@
+using StarterAssets;
 using UnityEngine;
 //using UnityEngine.SceneManagement;
 using UnityEngine.SceneManagement;
@@ -7,13 +8,16 @@ public class SceneChange : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        controller = GetComponent<FirstPersonController>();
     }
-
+    StarterAssets.FirstPersonController controller;
     // Update is called once per frame
     void Update()
     {
-        
+        if (controller.isSpongePress())
+        {
+            NextSceneFuntion();
+        }
     }
 
 
